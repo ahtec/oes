@@ -1,0 +1,37 @@
+#loginKnop{
+    background-color:peru;
+    color: black;
+    height:50px;
+    font-size: 20px;
+
+}
+
+p {
+    align-self: center;
+    background-color: antiquewhite;
+    color: blue;
+}
+
+#bewaarpersoon{
+    background-color:antiquewhite;
+    color: silver;
+    height:100px;
+    width:200px;
+    font-size: 20px;
+
+}
+
+#drop{
+    background-color: blanchedalmond;
+    color: silver;
+    height:100px;
+    font-size: 31px;
+}
+
+
+body {
+    font-size: 20px; ;
+    font-family:Courier New, Courier, monospace; 
+    background-color: blanchedalmond
+
+}
