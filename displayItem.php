@@ -26,7 +26,7 @@ $warehouse = $_SESSION['warehouse'];
         <table>
             <form name="displayItem" action="insertItem.php"    method =POST>
                 <?php
-                echo <<<MYTAG
+echo <<<MYTAG
                         <tr> <td> item                  </td> <td> $item     </td></tr>
                         <tr> <td> item description      </td> <td> $desc     </td></tr>
                         <tr> <td> current stock         </td> <td> $stock    </td></tr>
@@ -39,7 +39,7 @@ MYTAG;
             <!--<tr> <td> hours to get this <br>item delivered to the <br>warehouse</td> <td><input type="text" name="delTime" value="10" size="30" /></td></tr>-->
                 <tr> <td>  <br><br>   <input type="submit" value="OK" id=screenButtons"></td></tr>
         </table>  
-
+</form>
         <button onclick="cansel()" >Cansel</button>
 
 
