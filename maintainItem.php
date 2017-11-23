@@ -14,6 +14,30 @@ require_once './connection.php';
         <meta charset="UTF-8">
         <title>Display Item</title>
         <script  src="commonFunctions.js"></script>  
+        <script>
+            function verwerkWijzItem() {
+                var searchString = document.getElementById("IDitem").selectedIndex;
+
+                console.log(searchString);
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        alert(xhttp.responseText); 
+                        var response 
+                        document.getElementById("item").value = xhttp.responseText;
+//                        document.getElementById("desc").value = $_SESSION['desc'];
+                    }
+                };
+                xhttp.open("GET", "searchItem.php?itemSearch=" + searchString, true);
+                xhttp.send();
+
+
+//                    item = 
+//                }else
+//                    insidetext();
+            }
+
+        </script>
 
     </head>
     <body>
@@ -24,14 +48,14 @@ require_once './connection.php';
 
                 <?php
                 $conn = connectToDb();
-                echo "Select artikel " . createTagSelect($conn, "item", $item);
-                
-echo <<<MYTAG
-                        <tr> <td> item                  </td> <td><input type="text"   name="item" value=$item size="8" disabled="disabled" />
-                        <tr> <td> item description      </td> <td><input type="text"   name="desc" value="$desc" size="30"  /> </td></tr>
-                        <tr> <td> current stock         </td> <td><input type="number" name="stock" value=$stock size="30" /></td></tr>
-                        <tr> <td> minimum stock allowed </td> <td><input type="number" name="minStock" value=$minStock size="30" /></td></tr>
-                        <tr> <td> maximum stock         </td> <td><input type="number" name="maxStock" value=$maxStock size="30" /></td></tr>
+                echo "Select artikel " . createTagSelect($conn, "IDitem", $item);
+
+                echo <<<MYTAG
+                        <tr> <td> item                  </td> <td><input type="text"   name="item" value=$item id=item size="8" disabled="disabled" />
+                        <tr> <td> item description      </td> <td><input type="text"   name="desc" value="$desc" id=desc size="30"  /> </td></tr>
+                        <tr> <td> current stock         </td> <td><input type="number" name="stock" value=$stock id=stock size="30" /></td></tr>
+                        <tr> <td> minimum stock allowed </td> <td><input type="number" name="minStock" value=$minStock id=minStock  size="30" /></td></tr>
+                        <tr> <td> maximum stock         </td> <td><input type="number" name="maxStock" value=$maxStock id=maxStock size="30" /></td></tr>
                         <tr> <td> warehouse </td> <td>   
                                 <select name="warehouse"> 
                                     <option value="west">Small items warehouse</option> 
@@ -54,7 +78,7 @@ MYTAG;
             $sql = "SELECT `description` ,`item` FROM `item`;";
             $erinResultSet = $ParamConn->query($sql);
 
-            $eruit = "<select id=$selectidname onChange=checkdouble(); >";  // assign the <select> openings tag with id and event=functioncall as string  
+            $eruit = "<select id=$selectidname onChange=verwerkWijzItem(); >";  // assign the <select> openings tag with id and event=functioncall as string  
             for ($x = 0; $x < $erinResultSet->num_rows; $x++) {// count the number of records in the recordset and make sure that the for loops that amount of times
                 $row = $erinResultSet->fetch_assoc();  // Get the next record AS an array into the variable row
                 if ($row['item'] == $p_item) {
@@ -62,6 +86,9 @@ MYTAG;
                 } else {
                     $eruit .= "<option>";   // append new string information with .=
                 }
+                $eruit .= "[["; // make the option with only the naam out of the record set
+                $eruit .= $row['item']; // make the option with only the naam out of the record set
+                $eruit .= "]]  "; // make the option with only the naam out of the record set
                 $eruit .= $row['description']; // make the option with only the naam out of the record set
                 $eruit .= "</option>";
             }
