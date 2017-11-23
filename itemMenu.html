@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Order Entry Sytem</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            
+#selectdiv{
+
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background-color: goldenrod;
+    border-radius: 15px;
+
+}
+            
+/* Add a black background color to the top navigation */
+.topnav {
+    background-color: #333;
+    overflow: hidden;
+}
+
+/* Style the links inside the navigation bar */
+.topnav a {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-family: "Arial", "Book Antiqua", Palatino, serif;
+    font-size: 30px;
+}
+
+/* Change the color of links on hover */
+.topnav a:hover {
+    background-color: #cccccc;
+    color: black;
+    
+}
+
+/* Add a color to the active/current link */
+.topnav a.active {
+    background-color: goldenrod;
+    color: white;
+}            
+header{
+
+    background-color: #999999;
+    color: white;
+    text-align: center;
+    font-family: "Arial", "Book Antiqua", Palatino, serif;
+    font-size: 60px;
+    letter-spacing: 5px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+
+
+
+}
+header::first-letter {
+    color: #e8c264;
+    font-size: 90px;
+}
+
+#top::first-letter {
+    color: #e8c264;
+    font-size: 90px;
+}
+
+
+
+
+
+
+        </style>
+    </head>
+    <body>
+         <header>Order Entry System<br>Items</header> 
+        <nav>
+            <div class="topnav" id="myTopnav">
+                <a href="insertItem.php" >Create </a>
+                <a href="maintainItem.php"> Maintain  </a>
+                <a href="displayItem.php">Display  </a>
+                <a href="#about">About</a>
+            </div>
+        </nav>
+
+        <div id="selectdiv">  </div>
+
+
+    </body>
+</html>
