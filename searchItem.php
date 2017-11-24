@@ -47,11 +47,12 @@ $_SESSION['warehouse']  =  $row['warehouse']     ;
 
 $objTransportItem =  new item();
 
-$objTransportItem->item         =   $item      ;
-$objTransportItem->description  =   $desc      ;
-$objTransportItem->stock        =   $stock     ;
-$objTransportItem->mintock      =   $minStock  ;
-$objTransportItem->maxstock     =   $maxStock  ;
+$objTransportItem->item         =   $item       ;
+$objTransportItem->description  =   $desc       ;
+$objTransportItem->stock        =   $stock      ;
+$objTransportItem->minStock     =   $minStock   ;
+$objTransportItem->maxStock     =   $maxStock   ;
+//$objTransportItem->warehouse    =   $warehouse ;
 //var_dump($objTransportItem);
         
         

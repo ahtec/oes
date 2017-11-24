@@ -3,8 +3,8 @@ class item{
         public $item        ;
         public $description ;
         public $stock       ;
-        public $minstock    ;
-        public $maxstock    ;
+        public $minStock    ;
+        public $maxStock    ;
         public $warehouse   ;
 //        
 //function __construct(

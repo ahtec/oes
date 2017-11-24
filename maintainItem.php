@@ -30,8 +30,12 @@ require_once './item.php';
 
 //                            console.log("jsonItemResponse");
 //                            console.log(jsonItemResponse);
-                        document.getElementById("item").value = jsonItemResponse.item;
-//                        document.getElementById("desc").value = $_SESSION['desc'];
+                        document.getElementById("item").value      = jsonItemResponse.item;
+                        document.getElementById("desc").value      = jsonItemResponse.description;
+                        document.getElementById("stock").value     = jsonItemResponse.stock;
+                        document.getElementById("minStock").value  = jsonItemResponse.minStock;
+                        document.getElementById("maxStock").value  = jsonItemResponse.maxStock;
+//                        document.getElementById("warehouse").value = jsonItemResponse.warehouse;
                     }
                 };
                 xhttp.open("GET", "searchItem.php?itemSearch=" + searchString, true);
@@ -49,14 +53,14 @@ require_once './item.php';
     <body>
 
         <table>
-            <form name="insertItem" action="insertItemDB.php"   onsubmit="return validate(this)" method =POST>
+            <form name="insertItem" action="updateItemDB.php"   onsubmit="return validate(this)" method =POST>
                 <!--<form name="insertItem"    onsubmit="return validate(this)" method =POST>-->
 
                 <?php
                 $conn = connectToDb();
                 echo "Select artikel " . createTagSelect($conn, "IDitem", $item);
 echo <<<MYTAG
-                        <tr> <td> item                  </td> <td><input type="text"   name="item"     value=$item     id=item     size="8" disabled="disabled" />/></td></tr>
+                        <tr> <td> item                  </td> <td><input type="text"   name="item"     value=$item     id=item     size="8" disabled="disabled" /></td></tr>
                         <tr> <td> item description      </td> <td><input type="text"   name="desc"     value=$desc     id=desc     size="30"  /></td></tr>
                         <tr> <td> current stock         </td> <td><input type="number" name="stock"    value=$stock    id=stock    size="30"  /></td></tr>
                         <tr> <td> minimum stock allowed </td> <td><input type="number" name="minStock" value=$minStock id=minStock size="30"  /></td></tr>

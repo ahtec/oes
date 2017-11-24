@@ -22,26 +22,20 @@ if (isset($_REQUEST)) {
 
 $conn = connectToDb();
 if (!$conn->connect_error) {
-    $sql = "INSERT INTO `item` "
-            . "( `description`, `stock`, `minStock`, `maxStock`, `warehouse`) "
-            . "VALUES ( '$desc', $stock, $minStock, $maxStock, '$warehouse')";
-    echo $sql;
+//          UPDATE `item` SET `description` = 'nummer999' WHERE `item`.`item` = 999
+    $sql = "UPDATE `item` SET "
+            . "`description`  = '$desc'       "
+            . " , `stock`     = '$stock'      "
+            . " , `minStock ` = '$minStock'   " 
+            . " , `maxStock`  = '$maxStock'   " 
+            . " , `warehouse` = '$warehouse') ";
+           
+            echo $sql;
     $result = $conn->query($sql);
 
     if ($conn->connect_error) {
         echo "insert ging fout" . $conn->connect_error;
-    } else {
-        $sql = "SELECT MAX(`item`) FROM `item` ";
-        echo $sql;
-        echo "<br>";
-        $result = $conn->query($sql);
-        $row = mysqli_fetch_array($result);
-        echo $row[0];
-        $_SESSION['item'] = $row[0];
-
-
-//     var_dump($result);
-    }
+    } 
 
     mysqli_close($conn);        // sluit de connectie
     header("Location: displayItem.php");
