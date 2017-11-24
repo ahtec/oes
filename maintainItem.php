@@ -7,6 +7,7 @@ $minStock = $_SESSION['minStock'];
 $maxStock = $_SESSION['maxStock'];
 $warehouse = $_SESSION['warehouse'];
 require_once './connection.php';
+require_once './item.php';
 ?>
 
 <html>
@@ -18,13 +19,18 @@ require_once './connection.php';
             function verwerkWijzItem() {
                 var searchString = document.getElementById("IDitem").selectedIndex;
 
-                console.log(searchString);
+//                console.log(searchString);
                 var xhttp = new XMLHttpRequest();
                 xhttp.onreadystatechange = function () {
                     if (this.readyState == 4 && this.status == 200) {
-                        alert(xhttp.responseText); 
-                        var response 
-                        document.getElementById("item").value = xhttp.responseText;
+                        console.log("xhttp.responseText"); 
+                        console.log(xhttp.responseText); 
+                        var jsonItemResponse = JSON.parse(xhttp.responseText)   ;
+                        
+
+//                            console.log("jsonItemResponse");
+//                            console.log(jsonItemResponse);
+                        document.getElementById("item").value = jsonItemResponse.item;
 //                        document.getElementById("desc").value = $_SESSION['desc'];
                     }
                 };
@@ -49,13 +55,12 @@ require_once './connection.php';
                 <?php
                 $conn = connectToDb();
                 echo "Select artikel " . createTagSelect($conn, "IDitem", $item);
-
-                echo <<<MYTAG
-                        <tr> <td> item                  </td> <td><input type="text"   name="item" value=$item id=item size="8" disabled="disabled" />
-                        <tr> <td> item description      </td> <td><input type="text"   name="desc" value="$desc" id=desc size="30"  /> </td></tr>
-                        <tr> <td> current stock         </td> <td><input type="number" name="stock" value=$stock id=stock size="30" /></td></tr>
-                        <tr> <td> minimum stock allowed </td> <td><input type="number" name="minStock" value=$minStock id=minStock  size="30" /></td></tr>
-                        <tr> <td> maximum stock         </td> <td><input type="number" name="maxStock" value=$maxStock id=maxStock size="30" /></td></tr>
+echo <<<MYTAG
+                        <tr> <td> item                  </td> <td><input type="text"   name="item"     value=$item     id=item     size="8" disabled="disabled" />/></td></tr>
+                        <tr> <td> item description      </td> <td><input type="text"   name="desc"     value=$desc     id=desc     size="30"  /></td></tr>
+                        <tr> <td> current stock         </td> <td><input type="number" name="stock"    value=$stock    id=stock    size="30"  /></td></tr>
+                        <tr> <td> minimum stock allowed </td> <td><input type="number" name="minStock" value=$minStock id=minStock size="30"  /></td></tr>
+                        <tr> <td> maximum stock         </td> <td><input type="number" name="maxStock" value=$maxStock id=maxStock size="30"  /></td></tr>
                         <tr> <td> warehouse </td> <td>   
                                 <select name="warehouse"> 
                                     <option value="west">Small items warehouse</option> 

@@ -28,16 +28,16 @@ $warehouse = $_SESSION['warehouse'];
 
 }
 
-function setSessionVariables($erin){
-    $i=0;
-$_SESSION['item']       =  $erin[$i++]      ;
-$_SESSION['desc']       =  $erin[$i++]       ; 
-$_SESSION['stock']      =  $erin[$i++]      ;
-$_SESSION['minStock']   =  $erin[$i++]   ; 
-$_SESSION['maxStock']   =  $erin[$i++]   ;  
-$_SESSION['warehouse']  =  $erin[$i++]  ; 
-
-}
+//function setSessionVariables($erin){
+//    $i=0;
+//$_SESSION['item']       =  $erin[$i++]      ;
+//$_SESSION['desc']       =  $erin[$i++]       ; 
+//$_SESSION['stock']      =  $erin[$i++]      ;
+//$_SESSION['minStock']   =  $erin[$i++]   ; 
+//$_SESSION['maxStock']   =  $erin[$i++]   ;  
+//$_SESSION['warehouse']  =  $erin[$i++]  ; 
+//
+//}
 
 
 
@@ -50,18 +50,18 @@ $delDate   = $_SESSION['delDate'] ;
 $customer  = $_SESSION['customer']; 
 
 }
-
-function setOrderSessionVariables(array $erin){
-    var_dump($erin);
-    $i=0;
-$_SESSION['order']       =  $erin[$i++]      ;
-$_SESSION['desc']       =  $erin[$i++]       ; 
-$_SESSION['orderDate']      =  $erin[$i++]      ;
-$_SESSION['delDate']   =  $erin[$i++]   ; 
-$_SESSION['customer']   =  $erin[$i++]   ;  
-
-}
-
+//
+//function setOrderSessionVariables(array $erin){
+//    var_dump($erin);
+//    $i=0;
+//$_SESSION['order']       =  $erin[$i++]      ;
+//$_SESSION['desc']       =  $erin[$i++]       ; 
+//$_SESSION['orderDate']      =  $erin[$i++]      ;
+//$_SESSION['delDate']   =  $erin[$i++]   ; 
+//$_SESSION['customer']   =  $erin[$i++]   ;  
+//
+//}
+//
 
 
 
