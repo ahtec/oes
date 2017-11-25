@@ -1,13 +1,15 @@
 <?php
 session_start();
-$item = $_SESSION['item'];
-$desc = $_SESSION['desc'];
-$stock = $_SESSION['stock'];
-$minStock = $_SESSION['minStock'];
-$maxStock = $_SESSION['maxStock'];
-$warehouse = $_SESSION['warehouse'];
+if (isset($_SESSION)){
+    $item = $_SESSION['item'];
+    $desc = $_SESSION['desc'];
+    $stock = $_SESSION['stock'];
+    $minStock = $_SESSION['minStock'];
+    $maxStock = $_SESSION['maxStock'];
+    $warehouse = $_SESSION['warehouse'];
+}
 require_once './connection.php';
-require_once './item.php';
+require_once './model.php';
 ?>
 
 <html>
@@ -23,14 +25,16 @@ require_once './item.php';
                 var xhttp = new XMLHttpRequest();
                 xhttp.onreadystatechange = function () {
                     if (this.readyState == 4 && this.status == 200) {
-                        console.log("xhttp.responseText"); 
-                        console.log(xhttp.responseText); 
+//                        console.log("xhttp.responseText"); 
+//                        console.log(xhttp.responseText); 
                         var jsonItemResponse = JSON.parse(xhttp.responseText)   ;
                         
 
 //                            console.log("jsonItemResponse");
-//                            console.log(jsonItemResponse);
+                            console.log(jsonItemResponse);
                         document.getElementById("item").value      = jsonItemResponse.item;
+                        document.getElementById("hiddenitem").value      = jsonItemResponse.item;
+//console.log(document.getElementById("item"));                        
                         document.getElementById("desc").value      = jsonItemResponse.description;
                         document.getElementById("stock").value     = jsonItemResponse.stock;
                         document.getElementById("minStock").value  = jsonItemResponse.minStock;
@@ -53,18 +57,19 @@ require_once './item.php';
     <body>
 
         <table>
-            <form name="insertItem" action="updateItemDB.php"   onsubmit="return validate(this)" method =POST>
+            <form name="maintainItem" action="updateItemDB.php"   onsubmit="return validate(this)" method =POST>
                 <!--<form name="insertItem"    onsubmit="return validate(this)" method =POST>-->
 
                 <?php
                 $conn = connectToDb();
                 echo "Select artikel " . createTagSelect($conn, "IDitem", $item);
 echo <<<MYTAG
-                        <tr> <td> item                  </td> <td><input type="text"   name="item"     value=$item     id=item     size="8" disabled="disabled" /></td></tr>
-                        <tr> <td> item description      </td> <td><input type="text"   name="desc"     value=$desc     id=desc     size="30"  /></td></tr>
-                        <tr> <td> current stock         </td> <td><input type="number" name="stock"    value=$stock    id=stock    size="30"  /></td></tr>
-                        <tr> <td> minimum stock allowed </td> <td><input type="number" name="minStock" value=$minStock id=minStock size="30"  /></td></tr>
-                        <tr> <td> maximum stock         </td> <td><input type="number" name="maxStock" value=$maxStock id=maxStock size="30"  /></td></tr>
+                        <tr> <td> item                  </td> <td><input type="text"    name="item"     value=$item     id="item"    disabled="disabled" size="8" /></td></tr>
+                                                                  <input type="text"  name="item"     value=$item     id="hiddenitem"     size="8" />           
+                        <tr> <td> item description      </td> <td><input type="text"    name="desc"     value=$desc     id=desc     size="50"  /></td></tr>
+                        <tr> <td> current stock         </td> <td><input type="number"  name="stock"    value=$stock    id=stock    size="30"  /></td></tr>
+                        <tr> <td> minimum stock allowed </td> <td><input type="number"  name="minStock" value=$minStock id=minStock size="30"  /></td></tr>
+                        <tr> <td> maximum stock         </td> <td><input type="number"  name="maxStock" value=$maxStock id=maxStock size="30"  /></td></tr>
                         <tr> <td> warehouse </td> <td>   
                                 <select name="warehouse"> 
                                     <option value="west">Small items warehouse</option> 
@@ -77,10 +82,12 @@ MYTAG;
                 </tr> </td> 
                 <tr> <td>  <br><br>   <input type="submit" value="OK" id=screenButtons"></td></tr>
         </table>
-
-
-
         <?php
+
+        if (isset($_REQUEST['errorTxt'])) {
+            echo $_REQUEST['errorTxt'];
+
+        }
         $conn = connectToDb();
 
         function createTagSelect($ParamConn, $selectidname, $p_item) {
@@ -95,9 +102,9 @@ MYTAG;
                 } else {
                     $eruit .= "<option>";   // append new string information with .=
                 }
-                $eruit .= "[["; // make the option with only the naam out of the record set
+                $eruit .= "["; // make the option with only the naam out of the record set
                 $eruit .= $row['item']; // make the option with only the naam out of the record set
-                $eruit .= "]]  "; // make the option with only the naam out of the record set
+                $eruit .= "]  "; // make the option with only the naam out of the record set
                 $eruit .= $row['description']; // make the option with only the naam out of the record set
                 $eruit .= "</option>";
             }

@@ -1,11 +1,48 @@
 <?php
-class item{
+abstract class moa_item{
         public $item        ;
         public $description ;
         public $stock       ;
         public $minStock    ;
         public $maxStock    ;
+
+
+}
+
+
+interface vooraadAanvulling{
+    function aanvvulling();
+    function  isHetnoodzakelijkDeVoorraadAanTeVullen();
+}
+
+
+
+class item  extends moa_item implements vooraadAanvulling{
         public $warehouse   ;
+
+        public function aanvvulling() {
+        // als er besteld gaat worden dat zou de voorraad 
+        // voor dit artikel kunnen worden aangevuld tot
+
+            $voorraadAnnvullenmet = $this->maxStock - $this->stock;
+            return     $voorraadAnnvullenmet;    
+    }
+
+    
+    
+    public function isHetnoodzakelijkDeVoorraadAanTeVullen() {
+    $ertuit = FALSE;             
+        if ($this->stock < $this->minstock){
+          $ertuit = TRUE  ;
+        }
+        return $ertuit;
+    }
+
+}
+
+
+
+
 //        
 //function __construct(
 //            $p_item        ,       
@@ -27,4 +64,3 @@ class item{
 //    
 //        }
         
-}

@@ -8,7 +8,7 @@ $minStock  = $_SESSION['minStock'];
 $maxStock  = $_SESSION['maxStock'];
 $warehouse = $_SESSION['warehouse'];
 require_once './connection.php';
-require_once './item.php';
+require_once './model.php';
 
 //getSessionVariables();
 
