@@ -1,17 +1,14 @@
 <?php
-
 session_start();
-
 require_once './connection.php';
 $returnText = "";
-//var_dump($_REQUEST);
 
 if (isset($_REQUEST)) {
-    $order =    $_REQUEST['order'];
-    $desc =     $_REQUEST['desc'];
-    $orderDate =$_REQUEST['orderDate'];
-    $delDate =  $_REQUEST['delDate'];
-    $customer = $_REQUEST['customer'];
+    $order      =   $_REQUEST['order']      ;
+    $desc       =   $_REQUEST['desc']       ;
+    $orderDate  =   $_REQUEST['orderDate']  ;
+    $delDate    =   $_REQUEST['delDate']    ;
+    $customer   =   $_REQUEST['customer']   ;
 
     $_SESSION['order']      = $order    ;
     $_SESSION['desc']       = $desc     ;
@@ -19,20 +16,20 @@ if (isset($_REQUEST)) {
     $_SESSION['delDate']    = $delDate  ;
     $_SESSION['customer']   = $customer ;
 } else {
-    $returnText = "error [101] Doorvoer gegevens niet correct <<updateOrderDB>>";
+    $returnText = "error [102] Doorvoer gegevens niet correct <<updateOrderDB>>";
 }
 echo $_REQUEST['order'];
 $conn = connectToDb();
 if (!$conn->connect_error) {
     $sql = "UPDATE `order` SET "
-            . "`description`  = '$desc'       "
-            . " , `stock`     = '$orderDate'  "
-            . " , `minStock`  = '$delDate'    "
-            . " , `maxStock`  = '$customer'   "
+            . "   `description` = '$desc'       "
+            . " , `orderDate`   = '$orderDate'  "
+            . " , `delDate`     = '$delDate'    "
+            . " , `customer`    = '$customer'   "
             . "WHERE `order`.`order` = '$order' ";
 
 //    echo $sql;
-    if (!isset($_REQUEST['item'])) {
+    if (!isset($_REQUEST['order'])) {
         $returnText = "error [100] order not set <<updateIrderDB>>";
     } else {
         $result = $conn->query($sql);
