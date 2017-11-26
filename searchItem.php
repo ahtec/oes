@@ -52,7 +52,7 @@ $objTransportItem->description  =   $desc       ;
 $objTransportItem->stock        =   $stock      ;
 $objTransportItem->minStock     =   $minStock   ;
 $objTransportItem->maxStock     =   $maxStock   ;
-//$objTransportItem->warehouse    =   $warehouse ;
+$objTransportItem->warehouse    =   $warehouse ;
 //var_dump($objTransportItem);
         
         

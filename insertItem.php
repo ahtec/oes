@@ -1,10 +1,14 @@
 <?php
+session_abort();
 session_start();
+
 ?>
 <html>
     <head>
         <meta charset="UTF-8">
         <title>Insert Item</title>
+           <link rel = "stylesheet" type = "text/css" href="oesCss.css"> 
+
         <script  src="commonFunctions.js"></script>  
         <script>
             var toCansel = false;
@@ -60,12 +64,12 @@ session_start();
                 <tr> <td> minimum stock allowed </td> <td><input type="number" name="minStock" value="0" size="30" /></td></tr>
                 <tr> <td> maximum stock         </td> <td><input type="number" name="maxStock" value="9999" size="30" /></td></tr>
                 <tr> <td> warehouse </td> <td>   
-                        <select name="warehouse"> 
-                            <option value="west">Small items warehouse</option> 
-                            <option value="east">Bulk warehouse</option> 
-                            <option value="north">Temp controled</option> 
-                            <option value="south">Secured</option> 
-                        </select> 
+                            <select name="warehouse" id=warehouse> 
+                                <option value="Small_items_warehouse"> Small_items_warehouse</option> 
+                                <option value="Bulk_warehouse"> Bulk_warehouse</option> 
+                                <option value="Temp_controled">Temp_controled</option> 
+                                <option value="Secured">Secured</option> 
+                            </select>       
                 </tr> </td> 
                 <tr> <td>  <br><br>   <input type="submit" value="OK" id=screenButtons"></td></tr>
         </table>

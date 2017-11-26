@@ -23,8 +23,10 @@ if (isset($_REQUEST)) {
 } else {
     $returnText = "error [101] Doorvoer gegevens niet correct <<updateItemDB>>";
 }
-//echo "item:";
-//echo $item;
+echo "item:";
+echo $item;
+echo "en nu ";
+echo $_REQUEST['item'];
 $conn = connectToDb();
 if (!$conn->connect_error) {
 //          UPDATE `item` SET `description` = 'nummer999' WHERE `item`.`item` = 999
@@ -37,7 +39,7 @@ if (!$conn->connect_error) {
             . "WHERE `item`.`item` = '$item' ";
 
 //    echo $sql;
-    if (!isset($item)) {
+    if (!isset($_REQUEST['item'])) {
         $returnText = "error [100] Item not set <<updateItemDB>>";
     } else {
         $result = $conn->query($sql);
