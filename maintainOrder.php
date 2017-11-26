@@ -1,14 +1,6 @@
 <?php
 session_start();
 if (isset($_SESSION)){
-//    
-//    $item = $_SESSION['item'];
-//    $desc = $_SESSION['desc'];
-//    $stock = $_SESSION['stock'];
-//    $minStock = $_SESSION['minStock'];
-//    $maxStock = $_SESSION['maxStock'];
-//    $warehouse = $_SESSION['warehouse'];
-//    
     $item ="";
     $desc = "";
     $stock = 0;
@@ -59,7 +51,7 @@ require_once './model.php';
     <body>
 
         <table>
-            <form name="maintainOrderItem" action="updateOrderDB.php"   onsubmit="return validate(this)" method =POST>
+            <form name="maintainOrder" action="updateOrderDB.php"   onsubmit="return validate(this)" method =POST>
 
                 <?php
                 $conn = connectToDb();
