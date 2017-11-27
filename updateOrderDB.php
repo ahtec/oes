@@ -36,8 +36,7 @@ if (!$conn->connect_error) {
         if ($conn->connect_error) {
             echo "Error [409] in update update ging fout" . $conn->connect_error;
         }
-        mysqli_close($conn);        // sluit de connectie
-
+        mysqli_close($conn);      
         $returnText = "Changes are implemented ";
     }
 } else {

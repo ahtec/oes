@@ -51,16 +51,16 @@ require_once './model.php';
     <body>
 
         <table>
-            <form name="maintainOrder" action="updateOrderDB.php"   onsubmit="return validate(this)" method =POST>
+            <form name="maintainOrder" action="updateOrderDB.php"   onsubmit="return validate(this)" method =GET>
 
                 <?php
                 $conn = connectToDb();
                 echo "Select order " . createTagSelect($conn, "IDorder", $order);
                 ?>    
-                    <tr> <td> order                  </td> <td><input type="text"  name="order"     value=""   id=order     size="8"   /></td></tr>           
-                    <tr> <td> order description      </td> <td><input type="text"  name="desc"      value=""   id=desc      size="50"  /></td></tr>
-                    <tr> <td> Date Ordered           </td> <td><input type="date"  name="orderDate" value=    id=orderDate size="30"  /></td></tr>
-                    <tr> <td> Delivery date          </td> <td><input type="date"  name="delDate"   value=    id=delDate   size="30"  /></td></tr>
+                    <tr> <td> order                  </td> <td><input type="text"  name="order"     value=""              id="order"   size="8"   /></td></tr>           
+                    <tr> <td> order description      </td> <td><input type="text"  name="desc"      value=""              id="desc"    size="50"  /></td></tr>
+                    <tr> <td> Date Ordered           </td> <td><input type="date"  name="orderDate" value="2017-11-27"    id=orderDate size="30"  /></td></tr>
+                    <tr> <td> Delivery date          </td> <td><input type="date"  name="delDate"   value="2017-11-28"    id=delDate   size="30"  /></td></tr>
                     <tr> <td> customer  </td> <td>   
                             <select name="customer" id="customer"> 
                             <option value="Schiphol">Schiphol</option> 

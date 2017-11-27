@@ -1,11 +1,21 @@
 <?php
 
 session_start();
-$order      = $_SESSION['order'];
-$desc       = $_SESSION['desc'];
-$orderDate  = $_SESSION['orderDate'];
-$delDate    = $_SESSION['delDate'];
-$customer   = $_SESSION['customer'];
+if (isset($_SESSION)){
+    if (isset($_SESSION['order'])){
+     $order      = $_SESSION['order'];   
+    } else {
+        
+    {
+        $order = 0;
+    }
+   
+    }
+}
+//$desc       = $_SESSION['desc'];
+//$orderDate  = $_SESSION['orderDate'];
+//$delDate    = $_SESSION['delDate'];
+//$customer   = $_SESSION['customer'];
 require_once './connection.php';
 require_once './model.php';
 
@@ -20,11 +30,11 @@ $resultSet = $conn->query($sql);
 
 $row = $resultSet->fetch_assoc();  
 //var_dump($row);
-$order     = $row['order']     ;
-$desc      = $row['description']      ; 
-$orderDate = $row['orderDate'] ;
-$delDate   = $row['delDate']   ; 
-$customer  = $row['customer']  ; 
+$order     = $row['order']      ;
+$desc      = $row['description']; 
+$orderDate = $row['orderDate']  ;
+$delDate   = $row['delDate']    ; 
+$customer  = $row['customer']   ; 
 
 
 //var_dump($item     )  ;
@@ -47,7 +57,7 @@ $customer  = $row['customer']  ;
 
 $objTransport               =  new order()  ;
 $objTransport->order        =   $order      ;
-$objTransport->desc         =   $desc       ;
+$objTransport->description  =   $desc       ;
 $objTransport->orderDate    =   $orderDate  ;
 $objTransport->delDate      =   $delDate    ;
 $objTransport->customer     =   $customer   ;
