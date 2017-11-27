@@ -37,8 +37,9 @@ MYTAG;
                 <tr> <td>  <br><br>   <input type="submit" value="OK" id=screenButtons"></td></tr>
         </table>  
     </form>
-
-
     <button onclick="cansel()" >Cansel</button>
 
+    
+    
+    
 </body>
