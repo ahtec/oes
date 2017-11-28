@@ -76,3 +76,64 @@ header::first-letter {
     color: black;
     font-size: 50px;
 }
+
+
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 5px;
+    text-align: left;
+}
+table#t01 {
+    table-layout: fixed; width: 800px;
+    background-color: #f1f1c1;
+    
+}
+
+
+table#t01 tr:nth-child(even) {
+    background-color: #f0eee5;
+}
+table#t01 tr:nth-child(odd) {
+    background-color: #eee;
+}
+table#t01 th {
+    color: white;
+    background-color: black;
+}
+
+
+#colom {
+    height: 30px;
+    width: 100px;
+}
+
+#warehouse{
+    font-family: "Arial", "Book Antiqua", Palatino, serif;
+    background-color: #a7a390;
+    height: 50px;
+}
+
+
+
+.backButton{
+    color: black;
+    font-size: 50px;
+}
+
+
+
+/* Style the links inside the navigation bar */
+.backButton a {
+    float: left;
+    display: block;
+    color: #999999;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-family: "Arial", "Book Antiqua", Palatino, serif;
+    font-size: 30px;
+}
