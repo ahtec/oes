@@ -14,28 +14,37 @@ $conn = connectToDb();
     }
 
 for ($i = 1; $i <= $teverwerkenAantal; $i++) {
-    $naamAantal = "aantal" . $i;
-    $naamHiddenAantal = "hiddenaantal" . $i;
-    $nieuwAantal = $_REQUEST[$naamAantal];
-    $verschil = $_REQUEST[$naamHiddenAantal] - $_REQUEST[$naamAantal];
+    $naamAantal         = "aantal" . $i;
+    $naamHiddenAantal   = "hiddenaantal" . $i;
+    $nieuwAantal        = $_REQUEST[$naamAantal];
+    $verschil           = $_REQUEST[$naamHiddenAantal] - $_REQUEST[$naamAantal];
     if ($verschil != 0) {
-        echo "Er is een verschil";
-        echo $verschil;
-        echo "<br>";
+        echo "Er is een verschil van: " .$verschil."<br>";
         if ($_REQUEST[$naamHiddenAantal] == 0) {
-            echo "aantal was 0";
-            echo " in I=" . $i;
-            // insteretn in orderline
             insertInOrderLine($i, $order, $nieuwAantal,$conn);
         } else {
-            //uopdaten orderline
-            updateOrderline($i, $order,$conn);
+            updateOrderline($i, $order,$nieuwAantal,$conn);
+        }
+        if ($_REQUEST[$naamAantal] == 0) {
+            deleteInOrderLine($i, $order, $nieuwAantal,$conn);
         }
     }
+    
+    
 //    header("Location: insertOrderLines.php");
 
 //    echo $_REQUEST[$naamAantal];
 //    echo alsAantalVerschilt($order, $_REQUEST[$naamAantal], $i);
+}
+
+function updateOrderline($pItemTeller, $pOrder, $pAmount,$conn) {
+//UPDATE `orderlines` SET `amount` = '55' WHERE `orderlines`.`order` = 7 AND `orderlines`.`item` = 1015;
+    $sql = sprintf("UPDATE `orderlines` SET `amount` = %d WHERE  `orderlines`.`order` = %d AND `orderlines`.`item` =  %d",$pAmount ,$pOrder, converteerRijNummer2Item($pItemTeller,$conn) );
+    echo $sql;
+
+    if (!$conn->query($sql)) {
+        printf("Errormessage: %s\n", $conn->error);
+    }
 }
 
 function insertInOrderLine($pItemTeller, $pOrder, $pAmount,$conn) {
@@ -44,7 +53,7 @@ function insertInOrderLine($pItemTeller, $pOrder, $pAmount,$conn) {
     echo $sql;
 
     if (!$conn->query($sql)) {
-        printf("Errormessage: %s\n", $mysqli->error);
+        printf("Errormessage: %s\n", $conn->error);
     }
 }
 
