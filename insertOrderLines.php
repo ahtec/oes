@@ -73,6 +73,7 @@ MYTAG;
         $i++;
         echo "<tr>";
         echo "<td>" . $row['item'] . "</td><td> <input type=text name=aantal".$i."  id=IDnaam  value =$aantal  > </td>";
+        echo "<td>" . $row['item'] . "</td><td> <input type=hidden name=hiddenaantal".$i."  id=IDnaam  value =$aantal   > </td>";
         echo "<td>" . $row['description'] . "</td>";
         echo "</tr>";
     }
