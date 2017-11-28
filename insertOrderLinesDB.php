@@ -21,40 +21,47 @@ for ($i = 1; $i <= $teverwerkenAantal; $i++) {
     $vorigAantal = $_REQUEST[$naamHiddenAantal];
     $verschil = $vorigAantal - $nieuwAantal;
     if ($verschil != 0) {
+        $huidigItem = converteerRijNummer2Item($i);
         echo "Er is een verschil van: " . $verschil . "op regel $i <br>";
         if ($nieuwAantal != 0 && $vorigAantal == 0) {
-            insertInOrderLine($i, $order, $nieuwAantal);
+            if (bestaatOrderLine($huidigItem, $order)) {
+                echo "naar de update";
+                updateOrderline($huidigItem, $order, $nieuwAantal);
+            } else {
+                echo "naar de insert";
+                insertInOrderLine($huidigItem, $order, $nieuwAantal);
+            }
         }
-
         if ($nieuwAantal != 0 && $vorigAantal != 0) {
-            updateOrderline($i, $order, $nieuwAantal);
+            echo "naar de up";
+            updateOrderline($huidigItem, $order, $nieuwAantal);
         }
-
         if ($nieuwAantal == 0 && $vorigAantal != 0) {
-            deleteOrderLine($i, $order, $nieuwAantal);
+            echo "naar de del";
+            deleteOrderLine($huidigItem, $order, $nieuwAantal);
         }
     }
 }
+
 $conn->close();
-header("Location: insertOrderLines.php?errorText=$errorText ");
 
-function deleteOrderLine($pItemTeller, $pOrder) {
-    echo $pItemTeller;
+//header("Location: insertOrderLines.php?errorText=$errorText ");
 
-    $zoekItem = converteerRijNummer2Item($pItemTeller);
-    echo $zoekItem;
+function deleteOrderLine($zoekItem, $pOrder) {
+
+    $conn = connectToDb();
     $sql = sprintf("DELETE FROM `orderlines` WHERE `orderlines`.`order` = %d AND `orderlines`.`item` = %d", $pOrder, $zoekItem);
     echo $sql;
     echo "<br>";
-    $conn = connectToDb();
     if (!$conn->query($sql)) {
         verwerkError(sprintf("Errormessage: %s\n", $conn->error));
     }
+
     $conn->close();
 }
 
-function updateOrderline($pItemTeller, $pOrder, $pAmoun) {
-    $sql = sprintf("UPDATE `orderlines` SET `amount` = %d WHERE  `orderlines`.`order` = %d AND `orderlines`.`item` =  %d", $pAmount, $pOrder, converteerRijNummer2Item($pItemTeller));
+function updateOrderline($zoekItem, $pOrder, $pAmount) {
+    $sql = sprintf("UPDATE `orderlines` SET `amount` = %d WHERE  `orderlines`.`order` = %d AND `orderlines`.`item` =  %d", $pAmount, $pOrder, $zoekItem);
     echo $sql;
     echo "<br>";
     $conn = connectToDb();
@@ -63,8 +70,8 @@ function updateOrderline($pItemTeller, $pOrder, $pAmoun) {
     }
 }
 
-function insertInOrderLine($pItemTeller, $pOrder, $pAmount) {
-    $sql = sprintf("INSERT INTO `orderLines` ( `order`,  `item`, `amount`) VALUES ( %d, %d , %d)", $pOrder, converteerRijNummer2Item($pItemTeller, $conn), $pAmount);
+function insertInOrderLine($zoekItem, $pOrder, $pAmount) {
+    $sql = sprintf("INSERT INTO `orderLines` ( `order`,  `item`, `amount`) VALUES ( %d, %d , %d)", $pOrder, $zoekItem, $pAmount);
     echo $sql;
     echo "<br>";
     $conn = connectToDb();
@@ -96,8 +103,9 @@ function verwerkError($pTxt) {
 }
 
 function bestaatOrderLine($pZoekItem, $pOrder) {
-    $sql = sprintf("SELECT * FROM `orderlines`   WHERE `orderlines`.`order` = %d AND `orderlines`.`item` = %d", $pOrder, $zoekItem);
-    echo "<br>".$sql."<br>";
+
+    $sql = sprintf("SELECT * FROM `orderlines`   WHERE `orderlines`.`order` = %d AND `orderlines`.`item` = %d", $pOrder, $pZoekItem);
+    echo "<br>" . $sql . "<br>";
     $conn = connectToDb();
     $resultSet = $conn->query($sql);
     if (count($resultSet) != 0) {
