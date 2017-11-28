@@ -8,72 +8,67 @@ echo "<br>";
 $teverwerkenAantal = count($_REQUEST);
 $teverwerkenAantal = $teverwerkenAantal / 2;
 
-
+$conn = connectToDb();
+    if ($conn->connect_error) {
+        printf("Errormessage: %s\n", $conn->error);
+    }
 
 for ($i = 1; $i <= $teverwerkenAantal; $i++) {
     $naamAantal = "aantal" . $i;
-    $hiddenAantal = "hiddenaantal" . $i;
-
-    $verschil = $_REQUEST[$hiddenAantal] - $_REQUEST[$naamAantal];
+    $naamHiddenAantal = "hiddenaantal" . $i;
+    $nieuwAantal = $_REQUEST[$naamAantal];
+    $verschil = $_REQUEST[$naamHiddenAantal] - $_REQUEST[$naamAantal];
     if ($verschil != 0) {
         echo "Er is een verschil";
         echo $verschil;
         echo "<br>";
-        if($_REQUEST[$hiddenAantal]  == 0   ) {
-            echo "aantal was 0"; 
-            echo " in I=".$i;
+        if ($_REQUEST[$naamHiddenAantal] == 0) {
+            echo "aantal was 0";
+            echo " in I=" . $i;
             // insteretn in orderline
-            insertInOrderLine($i,$order,$naamAantal);
-        }  else {
+            insertInOrderLine($i, $order, $nieuwAantal,$conn);
+        } else {
             //uopdaten orderline
-            updateOrderline($i,$order);
-            
+            updateOrderline($i, $order,$conn);
         }
     }
+//    header("Location: insertOrderLines.php");
 
 //    echo $_REQUEST[$naamAantal];
 //    echo alsAantalVerschilt($order, $_REQUEST[$naamAantal], $i);
 }
 
+function insertInOrderLine($pItemTeller, $pOrder, $pAmount,$conn) {
 
-
-
-
-
-function insertInOrderLine( $pItemTeller , $pOrder, $pAmount) {
-
-    
-    // zoek item mbv line nr
-    
-    $conn = connectToDb();
-$itemTeller--;
-$sql = "SELECT * FROM `item` WHERE 1 LIMIT 1 offset " .$pItemTeller;
-echo $sql;
-$resultSet = $conn->query($sql);
-$row = $resultSet->fetch_assoc();  
-var_dump($row);
-$localItem      = $row['item']         ;
-
-echo $localItem;
-
-
-if (!$conn->connect_error) {
-    $sql = "INSERT INTO `orderLines` "
-                    . "( `order`, `line`, `item`, `amount`) "
-            . "VALUES ( $order, 1 , $localItem, $maxStock, '$warehouse')";
+    $sql = sprintf("INSERT INTO `orderLines` ( `order`,  `item`, `amount`) VALUES ( %d, %d , %d)", $pOrder, converteerRijNummer2Item($pItemTeller,$conn), $pAmount);
     echo $sql;
-    $result = $conn->query($sql);
 
-    
-    
-    
+    if (!$conn->query($sql)) {
+        printf("Errormessage: %s\n", $mysqli->error);
+    }
 }
 
-    
-    
-    
+function converteerRijNummer2Item($pItemTeller,$conn) {
+    // zoek item mbv line nr
+    $localItem = 0;
+
+        $pItemTeller--;
+        $sql = "SELECT * FROM `item` WHERE 1 LIMIT 1 offset " . $pItemTeller;
+        echo $sql;
+        $resultSet = $conn->query($sql);
+        if (count($resultSet) != 0) {
+            $row = $resultSet->fetch_assoc();
+            var_dump($row);
+            $localItem = $row['item'];
+        }
+
+    return $localItem;
 }
-function alsAantalVerschilt($aantal, $itemTeller) {
+
+
+
+
+function alsAantalVerschilt($aantal, $itemTeller,$conn) {
 //    
 //    $aantal = 0;
 //    $conn = connectToDb();

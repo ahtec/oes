@@ -12,7 +12,7 @@ require_once './connection.php';
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Display Item</title>
+        <title>Maintain Orderlines</title>
         <script  src="commonFunctions.js"></script>  
         <script>
             function cansel() {
@@ -56,7 +56,6 @@ MYTAG;
     while ($row = mysqli_fetch_array($result)) {
         echo "<tr>";
         echo "<td>" . $row['order'] . "</td>";
-        echo "<td>" . $row['line'] . "</td>";
         echo "<td>" . $row['item'] . "</td>";
         echo "<td>" . $row['amount'] . "</td>";
         echo "<td>" . $row['lineText'] . "</td>";
