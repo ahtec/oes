@@ -110,6 +110,11 @@ table#t01 th {
     height: 30px;
     width: 100px;
 }
+#colomAanvullen {
+    height: 30px;
+    width: 100px;
+        color: coral;
+}
 
 #warehouse{
     font-family: "Arial", "Book Antiqua", Palatino, serif;
@@ -136,4 +141,12 @@ table#t01 th {
     text-decoration: none;
     font-family: "Arial", "Book Antiqua", Palatino, serif;
     font-size: 30px;
+}
+
+
+
+body{
+ font-family: "Arial", "Book Antiqua", Palatino, serif;
+ font-size: 20px;
+    
 }

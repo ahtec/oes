@@ -57,7 +57,7 @@ class item extends moa_item implements vooraadAanvulling {
 
     public function isHetnoodzakelijkDeVoorraadAanTeVullen() {
         $ertuit = FALSE;
-        if ($this->stock < $this->minstock) {
+        if ($this->stock < $this->minStock) {
             $ertuit = TRUE;
         }
         return $ertuit;

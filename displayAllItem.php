@@ -3,18 +3,7 @@
         <title>Order Entry Sytem</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-         <link rel = "stylesheet" type = "text/css" href="oesCss.css"> 
-         
-         
-           <script>
-        function cansel() {
-//                toCansel = true;
-                window.location.assign("itemMenu.html");
-//               alert("In de cansel")
-            }
-
-        </script>
-
+        <link rel = "stylesheet" type = "text/css" href="oesCss.css"> 
     </head>
     <body>
 
@@ -28,6 +17,11 @@ $conn = connectToDb();
 if (!$conn->connect_error) {
     $sql="SELECT * FROM `item`";
     $result = $conn->query($sql);
+    echo "<table>";
+                echo "<tr><td id=warehouse>";
+                echo "Display  all Items      "  ;
+                echo "</tr></td>";
+                echo "</table>";
     echo "<table>
             <tr>
                 <th>Item</th>
@@ -54,5 +48,7 @@ if (!$conn->connect_error) {
     ?>
 
 
-<button onclick="cansel()" >Ready</button>
+        <div class="backButton" >
+                <a href="itemMenu.html" >back</a>
+
 </body>
