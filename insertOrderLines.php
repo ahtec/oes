@@ -71,7 +71,7 @@ MYTAG;
 
     echo "<form name=insertOrderLinesDB   action=insertOrderLinesDB.php   method =GET>";
 
-    echo "<table><th> All Avialable  Items </th><th> Amount </th>";
+    echo "<table><th> All Avialable  Items </th><th> Amount </th><th> </th><th> </th><th> Description </th><th> Warehouse </th>";
     $i = 0;
     while ($row = mysqli_fetch_array($itemResult)) {
         $aantal = geefAnntalVanItemInOrderLines($order, $row['item']);
@@ -80,16 +80,14 @@ MYTAG;
         echo "<td>" . $row['item'] . "</td><td> <input type=text name=aantal" . $i . "  id=IDnaam  value =$aantal  > </td>";
         echo "<td>" . "</td><td> <input type=hidden name=hiddenaantal" . $i . "  id=IDnaam  value =$aantal   > </td>";
         echo "<td>" . $row['description'] . "</td>";
+        echo "<td>" . $row['warehouse'] . "</td>";
         echo "</tr>";
     }
-    echo "</table>";
-    echo " <tr> <td>   </td> <td>    <input type=submit value=Ready >   </td> </tr>";
-
-    echo "</form>";
-
-//mysqli_close($conn);
     ?>
+    </table>
+     <tr> <td>   </td> <td>    <input type=submit value=Ready >   </td> </tr>
 
+    </form>
     <button onclick="cansel()" >Cancel</button>
 
 </body>

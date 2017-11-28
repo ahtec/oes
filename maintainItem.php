@@ -30,11 +30,6 @@ require_once './model.php';
 //                 alert()
                 window.location.assign("itemMenu.html");
             }
-            function goToLines( {
-//                 alert()
-                window.location.assign("insertOrderLines.php");
-            }
-
             function verwerkWijzItem() {
                 var searchString = document.getElementById("IDitem").selectedIndex;
 //                console.log(searchString);
