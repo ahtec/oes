@@ -23,6 +23,7 @@ for ($i = 1; $i <= $teverwerkenAantal; $i++) {
     if ($verschil != 0) {
         $huidigItem = converteerRijNummer2Item($i);
         echo "Er is een verschil van: " . $verschil . "op regel $i <br>";
+        echo "huidig item is ".$huidigItem;
         if ($nieuwAantal != 0 && $vorigAantal == 0) {
             if (bestaatOrderLine($huidigItem, $order)) {
                 echo "naar de update";
@@ -45,7 +46,7 @@ for ($i = 1; $i <= $teverwerkenAantal; $i++) {
 
 $conn->close();
 
-//header("Location: insertOrderLines.php?errorText=$errorText ");
+header("Location: insertOrderLines.php?errorText=$errorText ");
 
 function deleteOrderLine($zoekItem, $pOrder) {
 
@@ -108,10 +109,12 @@ function bestaatOrderLine($pZoekItem, $pOrder) {
     echo "<br>" . $sql . "<br>";
     $conn = connectToDb();
     $resultSet = $conn->query($sql);
-    if (count($resultSet) != 0) {
-        return true;
-    } else {
+//    var_dump($resultSet);
+    
+    if ($resultSet->num_rows == 0) {
         return false;
+    } else {
+        return true;
     }
 }
 

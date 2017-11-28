@@ -102,7 +102,7 @@ function geefAnntalVanItemInOrderLines($pOrder, $pItem) {
     $aantalItemsInOrder = 0;
     $conn = connectToDb();
     $sql = sprintf("SELECT * FROM  `orderLines`  where  `order` = %d   and `item` = %d ", $pOrder, $pItem);
-    echo $sql;
+//    echo $sql;
     $result = mysqli_query($conn, $sql);
     if (count($result) == 0) {
         return 0;
