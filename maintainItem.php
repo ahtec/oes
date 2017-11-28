@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (isset($_SESSION)){
+if (isset($_SESSION)) {
 //    
 //    $item = $_SESSION['item'];
 //    $desc = $_SESSION['desc'];
@@ -9,12 +9,12 @@ if (isset($_SESSION)){
 //    $maxStock = $_SESSION['maxStock'];
 //    $warehouse = $_SESSION['warehouse'];
 //    
-    $item ="";
+    $item = "";
     $desc = "";
     $stock = 0;
     $minStock = 0;
-    $maxStock =  0;
-    $warehouse =  "west";
+    $maxStock = 0;
+    $warehouse = "west";
 }
 require_once './connection.php';
 require_once './model.php';
@@ -26,9 +26,13 @@ require_once './model.php';
         <title>Display Item</title>
         <script  src="commonFunctions.js"></script>  
         <script>
-             function cansel() {
+            function cansel() {
 //                 alert()
                 window.location.assign("itemMenu.html");
+            }
+            function goToLines( {
+//                 alert()
+                window.location.assign("insertOrderLines.php");
             }
 
             function verwerkWijzItem() {
@@ -37,17 +41,17 @@ require_once './model.php';
                 var xhttp = new XMLHttpRequest();
                 xhttp.onreadystatechange = function () {
                     if (this.readyState == 4 && this.status == 200) {
-                        console.log("xhttp.responseText"); 
-                        console.log(xhttp.responseText); 
-                        var jsonItemResponse = JSON.parse(xhttp.responseText)   ;
-                            console.log("jsonItemResponse");
-                            console.log(jsonItemResponse);
+                        console.log("xhttp.responseText");
+                        console.log(xhttp.responseText);
+                        var jsonItemResponse = JSON.parse(xhttp.responseText);
+                        console.log("jsonItemResponse");
+                        console.log(jsonItemResponse);
 //                        document.getElementById("item").innerHTML      = jsonItemResponse.item;
-                        document.getElementById("item").value      = jsonItemResponse.item;
-                        document.getElementById("desc").value      = jsonItemResponse.description;
-                        document.getElementById("stock").value     = jsonItemResponse.stock;
-                        document.getElementById("minStock").value  = jsonItemResponse.minStock;
-                        document.getElementById("maxStock").value  = jsonItemResponse.maxStock;
+                        document.getElementById("item").value = jsonItemResponse.item;
+                        document.getElementById("desc").value = jsonItemResponse.description;
+                        document.getElementById("stock").value = jsonItemResponse.stock;
+                        document.getElementById("minStock").value = jsonItemResponse.minStock;
+                        document.getElementById("maxStock").value = jsonItemResponse.maxStock;
                         document.getElementById("warehouse").value = jsonItemResponse.warehouse;
                     }
                 };
@@ -68,18 +72,18 @@ require_once './model.php';
                 $conn = connectToDb();
                 echo "Select artikel " . createTagSelect($conn, "IDitem", $item);
                 ?>    
-                    <tr> <td> item                  </td> <td><input type="text"    name="item"     value=""        id=item     size="8"   /></td></tr>           
-                    <tr> <td> item description      </td> <td><input type="text"    name="desc"     value=""        id=desc     size="50"  /></td></tr>
-                    <tr> <td> current stock         </td> <td><input type="number"  name="stock"    value=0         id=stock    size="30"  /></td></tr>
-                    <tr> <td> minimum stock allowed </td> <td><input type="number"  name="minStock" value=0         id=minStock size="30"  /></td></tr>
-                    <tr> <td> maximum stock         </td> <td><input type="number"  name="maxStock" value=0         id=maxStock size="30"  /></td></tr>
-                    <tr> <td> warehouse </td> <td>   
-                            <select name="warehouse" id=warehouse> 
-                                <option value="Small_items_warehouse"> Small_items_warehouse</option> 
-                                <option value="Bulk_warehouse"> Bulk_warehouse</option> 
-                                <option value="Temp_controled">Temp_controled</option> 
-                                <option value="Secured">Secured</option> 
-                            </select>       
+                <tr> <td> item                  </td> <td><input type="text"    name="item"     value=""        id=item     size="8"   /></td></tr>           
+                <tr> <td> item description      </td> <td><input type="text"    name="desc"     value=""        id=desc     size="50"  /></td></tr>
+                <tr> <td> current stock         </td> <td><input type="number"  name="stock"    value=0         id=stock    size="30"  /></td></tr>
+                <tr> <td> minimum stock allowed </td> <td><input type="number"  name="minStock" value=0         id=minStock size="30"  /></td></tr>
+                <tr> <td> maximum stock         </td> <td><input type="number"  name="maxStock" value=0         id=maxStock size="30"  /></td></tr>
+                <tr> <td> warehouse </td> <td>   
+                        <select name="warehouse" id=warehouse> 
+                            <option value="Small_items_warehouse"> Small_items_warehouse</option> 
+                            <option value="Bulk_warehouse"> Bulk_warehouse</option> 
+                            <option value="Temp_controled">Temp_controled</option> 
+                            <option value="Secured">Secured</option> 
+                        </select>       
 
                 </tr> </td> 
                 <tr> <td>  <br><br>   <input type="submit" value="OK" id=screenButtons"></td></tr>
@@ -104,7 +108,7 @@ require_once './model.php';
 //                if ($row['item'] == $p_item) {
 //                    $eruit .= "<option selected>";   // append new string information with .=
 //                } else {
-                    $eruit .= "<option>";   // append new string information with .=
+                $eruit .= "<option>";   // append new string information with .=
 //                }
                 $eruit .= "["; // make the option with only the naam out of the record set
                 $eruit .= $row['item']; // make the option with only the naam out of the record set

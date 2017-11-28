@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 $order = $_SESSION['order'];
 require_once './connection.php';

@@ -37,7 +37,7 @@ if (!$conn->connect_error) {
             echo "Error [409] in update update ging fout" . $conn->connect_error;
         }
         mysqli_close($conn);      
-        $returnText = "Changes are implemented ";
+        $returnText = "Changes are implemented";
     }
 } else {
     $returnText = "error [500] Connection error, see your database administrator <<updateOrderDB>>";
