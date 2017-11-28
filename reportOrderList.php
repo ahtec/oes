@@ -53,9 +53,6 @@ require_once './model.php';
 
         for ($i = 0; $i < count($items); $i++) {
             $objItem = $items[$i];
-//            echo $objItem->aanvvulling();
-//            echo "<br>";
-
             if ($objItem->isHetnoodzakelijkDeVoorraadAanTeVullen() == true) {
                 echo "<tr id=colomAanvullen>";
             } else {
@@ -71,16 +68,7 @@ require_once './model.php';
             echo "</tr>\n";
         }
         echo "</table>";
-
-
-
-
-
-//        var_dump($items);
         ?>     
-
-
-
 
         <div class="backButton" >
             <a href="reportMenu.html" >back</a>
