@@ -73,8 +73,8 @@ require_once './model.php';
                 </tr> </td> 
             </table>
             <tr> <td>  <br><br>   <input type="submit" value="OK" id=screenButtons"></td></tr>
-            <button onclick="cansel()" >Ready</button>
         </form>
+        <button onclick="cansel()" >Ready</button>
 
         <?php
         if (isset($_REQUEST['errorTxt'])) {

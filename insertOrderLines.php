@@ -24,7 +24,7 @@ if (isset($_REQUEST)) {
         <script  src="commonFunctions.js"></script>  
         <script>
             function cansel() {
-                window.location.assign("orderMenu.html");
+                window.location.assign("maintainOrder.php");
             }
         </script>
     </head>

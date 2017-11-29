@@ -1,13 +1,50 @@
 <?php
 session_abort();
 session_start();
-
 ?>
 <html>
     <head>
         <meta charset="UTF-8">
         <title>Insert Item</title>
-           <link rel = "stylesheet" type = "text/css" href="oesCss.css"> 
+        <!--<link rel = "stylesheet" type = "text/css" href="oesCss.css">--> 
+        <style>
+
+            input {
+                font-family: "Arial", "Book Antiqua", Palatino, serif;
+                font-size: 20px;
+            }
+            table {
+                font-family: "Arial", "Book Antiqua", Palatino, serif;
+                font-size: 20px;
+            }
+            table tr:nth-child(even) {
+                background-color: #f0eee5;
+            }
+            table tr:nth-child(odd) {
+                background-color: #eee;
+            }
+            table th {
+                color: white;
+                background-color: black;
+            }
+            .backButton a {
+                float: left;
+                display: block;
+                color: #999999;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+                font-family: "Arial", "Book Antiqua", Palatino, serif;
+                font-size: 30px;
+            }
+            #warehouse{
+                font-family: "Arial", "Book Antiqua", Palatino, serif;
+                font-size: 20px;
+            }
+
+
+        </style>
+
 
         <script  src="commonFunctions.js"></script>  
         <script>
@@ -56,27 +93,27 @@ session_start();
 
         <table>
             <form name="insertItem" action="insertItemDB.php"   onsubmit="return validate(this)" method =POST>
-            <!--<form name="insertItem"    method =POST>-->
-            <!--<form name="insertItem"    onsubmit="return validate(this)" method =POST>-->
+                <!--<form name="insertItem"    method =POST>-->
+                <!--<form name="insertItem"    onsubmit="return validate(this)" method =POST>-->
                 <tr> <td> item                  </td> <td><input type="text"   name="item" value="To be generated" size="8" disabled="disabled" />
                 <tr> <td> item description      </td> <td><input type="text"   name="desc" value="" size="30"  /> </td></tr>
                 <tr> <td> current stock         </td> <td><input type="number" name="stock" value="0" size="30" /></td></tr>
                 <tr> <td> minimum stock allowed </td> <td><input type="number" name="minStock" value="0" size="30" /></td></tr>
                 <tr> <td> maximum stock         </td> <td><input type="number" name="maxStock" value="9999" size="30" /></td></tr>
                 <tr> <td> warehouse </td> <td>   
-                            <select name="warehouse" id=warehouse> 
-                                <option value="Small_items_warehouse"> Small_items_warehouse</option> 
-                                <option value="Bulk_warehouse"> Bulk_warehouse</option> 
-                                <option value="Temp_controled">Temp_controled</option> 
-                                <option value="Secured">Secured</option> 
-                            </select>       
+                        <select name="warehouse" id=warehouse> 
+                            <option value="Small_items_warehouse"> Small_items_warehouse</option> 
+                            <option value="Bulk_warehouse"> Bulk_warehouse</option> 
+                            <option value="Temp_controled">Temp_controled</option> 
+                            <option value="Secured">Secured</option> 
+                        </select>       
                 </tr> </td> 
-                <tr> <td>  <br><br>   <input type="submit" value="OK" id=screenButtons"></td></tr>
         </table>
+        <input type="submit" value="OK" id=screenButtons">
 
     </form>        
-
-<button onclick="cansel()" >Cansel</button>
+    <div class="backButton" >
+        <a href="itemMenu.html" >Cancel</a>
 
 </body>
 </html>

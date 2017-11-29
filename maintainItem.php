@@ -1,22 +1,40 @@
 <?php
 session_start();
-if (isset($_SESSION)) {
-//    
-//    $item = $_SESSION['item'];
-//    $desc = $_SESSION['desc'];
-//    $stock = $_SESSION['stock'];
-//    $minStock = $_SESSION['minStock'];
-//    $maxStock = $_SESSION['maxStock'];
-//    $warehouse = $_SESSION['warehouse'];
-//    
-    $item = "";
-    $desc = "";
-    $stock = 0;
-    $minStock = 0;
-    $maxStock = 0;
-    $warehouse = "west";
-}
 require_once './connection.php';
+
+if (isset($_SESSION)) {
+
+    if (isset($_SESSION['item'])) {
+        $item = $_SESSION['item'];
+    } else {
+        $item = vulSessieItemsGegevensMetEersteItem();
+    }
+    if (isset($_SESSION['desc'])) {
+        $desc = $_SESSION['desc'];
+    } else {
+        $desc = "";
+    }
+    if (isset($_SESSION['stock'])) {
+        $stock = $_SESSION['stock'];
+    } else {
+        $stock = 0;
+    }
+    if (isset($_SESSION['minStock'])) {
+        $minStock = $_SESSION['minStock'];
+    } else {
+        $minStock = 0;
+    }
+    if (isset($_SESSION['maxStock'])) {
+        $maxStock = $_SESSION['maxStock'];
+    } else {
+        $maxStock = 0;
+    }
+    if (isset($_SESSION['warehouse'])) {
+        $warehouse = $_SESSION['warehouse'];
+    } else {
+        $warehouse = "";
+    }
+}
 require_once './model.php';
 ?>
 
@@ -24,14 +42,64 @@ require_once './model.php';
     <head>
         <meta charset="UTF-8">
         <title>Display Item</title>
+        <style>
+
+            input {
+                font-family: "Arial", "Book Antiqua", Palatino, serif;
+                font-size: 20px;
+            }
+            table {
+                font-family: "Arial", "Book Antiqua", Palatino, serif;
+                font-size: 20px;
+            }
+            table tr:nth-child(even) {
+                background-color: #f0eee5;
+            }
+            table tr:nth-child(odd) {
+                background-color: #eee;
+            }
+            table th {
+                color: white;
+                background-color: black;
+            }
+            .backButton a {
+                float: left;
+                display: block;
+                color: #999999;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+                font-family: "Arial", "Book Antiqua", Palatino, serif;
+                font-size: 30px;
+            }
+            #warehouse{
+                font-family: "Arial", "Book Antiqua", Palatino, serif;
+                font-size: 20px;
+            }
+
+        </style>
+
         <script  src="commonFunctions.js"></script>  
-        <script>
+        <script type="text/javascript">
+
+//            var once = function () {
+//                if (once.done)
+//                    return;
+//                console.log('Doing this once!');
+//                once.done = true;
+//            };
+//
+//            window.onload = once()
+//
+
+
             function cansel() {
 //                 alert()
                 window.location.assign("itemMenu.html");
             }
             function verwerkWijzItem() {
                 var searchString = document.getElementById("IDitem").selectedIndex;
+                var clickedItem = document.getElementById("IDitem").selectedIndex;
 //                console.log(searchString);
                 var xhttp = new XMLHttpRequest();
                 xhttp.onreadystatechange = function () {
@@ -58,16 +126,18 @@ require_once './model.php';
 
     </head>
     <body>
-
         <table>
             <form name="maintainItem" action="updateItemDB.php"   onsubmit="return validate(this)" method =POST>
                 <!--<form name="insertItem"    onsubmit="return validate(this)" method =POST>-->
 
                 <?php
                 $conn = connectToDb();
+                if ($item == 0) {
+//                    $item = vulSessieItemsGegevensMetEersteItem($conn);
+                }
                 echo "Select artikel " . createTagSelect($conn, "IDitem", $item);
                 ?>    
-                <tr> <td> item                  </td> <td><input type="text"    name="item"     value=""        id=item     size="8"   /></td></tr>           
+                <tr> <td> item                  </td> <td><input type="text"    name="item"     value=0          id=item     size="8"   /></td></tr>           
                 <tr> <td> item description      </td> <td><input type="text"    name="desc"     value=""        id=desc     size="50"  /></td></tr>
                 <tr> <td> current stock         </td> <td><input type="number"  name="stock"    value=0         id=stock    size="30"  /></td></tr>
                 <tr> <td> minimum stock allowed </td> <td><input type="number"  name="minStock" value=0         id=minStock size="30"  /></td></tr>
@@ -81,10 +151,13 @@ require_once './model.php';
                         </select>       
 
                 </tr> </td> 
-                <tr> <td>  <br><br>   <input type="submit" value="OK" id=screenButtons"></td></tr>
-            </form>
         </table>
-        <button onclick="cansel()" >Ready</button>
+      <br><br>   <input type="submit" value="OK" id=screenButtons">
+            </form>
+
+      <div class="backButton" >
+        <a href="itemMenu.html" >Cancel</a>
+
 
         <?php
         if (isset($_REQUEST['errorTxt'])) {
@@ -100,11 +173,11 @@ require_once './model.php';
             $eruit = "<select id=$selectidname onClick=verwerkWijzItem(); >";  // assign the <select> openings tag with id and event=functioncall as string  
             for ($x = 0; $x < $erinResultSet->num_rows; $x++) {// count the number of records in the recordset and make sure that the for loops that amount of times
                 $row = $erinResultSet->fetch_assoc();  // Get the next record AS an array into the variable row
-//                if ($row['item'] == $p_item) {
-//                    $eruit .= "<option selected>";   // append new string information with .=
-//                } else {
-                $eruit .= "<option>";   // append new string information with .=
-//                }
+                if ($row['item'] == $p_item) {
+                    $eruit .= "<option selected>";   // append new string information with .=
+                } else {
+                    $eruit .= "<option>";   // append new string information with .=
+                }
                 $eruit .= "["; // make the option with only the naam out of the record set
                 $eruit .= $row['item']; // make the option with only the naam out of the record set
                 $eruit .= "]  "; // make the option with only the naam out of the record set
@@ -114,6 +187,29 @@ require_once './model.php';
             $eruit .= "</select>"; // <select closing tag
 
             return $eruit; // return the result
+        }
+
+        function vulSessieItemsGegevensMetEersteItem() {
+            $conn = connectToDb();
+            $sql = "SELECT *  FROM `item`  WHERE 1 LIMIT 1 offset 1 ";
+            $resultSet = $conn->query($sql);
+            $row = $resultSet->fetch_assoc();
+//            var_dump($row);
+            $item = $row['item'];
+            $desc = $row['description'];
+            $stock = $row['stock'];
+            $minStock = $row['minStock'];
+            $maxStock = $row['maxStock'];
+            $warehouse = $row['warehouse'];
+            $_SESSION['item'] = $row['item'];
+            $_SESSION['desc'] = $row['description'];
+            $_SESSION['stock'] = $row['stock'];
+            $_SESSION['minStock'] = $row['minStock'];
+            $_SESSION['maxStock'] = $row['maxStock'];
+            $_SESSION['warehouse'] = $row['warehouse'];
+
+
+            return $item;
         }
         ?>
 
