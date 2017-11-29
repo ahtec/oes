@@ -12,6 +12,12 @@ function connectToDb() {
 }
 
 
+function oesLog($erinText) {
+                $fh = fopen("oes.log", 'a+');
+                fwrite($fh ,date("F j, Y, g:i a"));  
+                fwrite($fh ,$erinText . PHP_EOL);
+                fclose($fh);
+            }
 
 //function getSessionVariables() {
 //    $item = $_SESSION['item'];

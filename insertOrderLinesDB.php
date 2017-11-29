@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 $order = $_SESSION['order'];
 require_once './connection.php';
@@ -18,27 +19,32 @@ for ($i = 1; $i <= $teverwerkenAantal; $i++) {
     $naamHiddenAantal = "hiddenaantal" . $i;
     $nieuwAantal = $_REQUEST[$naamAantal];
     $vorigAantal = $_REQUEST[$naamHiddenAantal];
-    $verschil = $vorigAantal - $nieuwAantal;
+    $verschil = $vorigAantal - $nieuwAantal;  // bijboeken op orderlijn geeft een neg verschil voor het item stock
     if ($verschil != 0) {
         $huidigItem = converteerRijNummer2Item($i);
         echo "Er is een verschil van: " . $verschil . "op regel $i <br>";
-        echo "huidig item is ".$huidigItem;
+        echo "huidig item is " . $huidigItem;
         if ($nieuwAantal != 0 && $vorigAantal == 0) {
             if (bestaatOrderLine($huidigItem, $order)) {
                 echo "naar de update";
                 updateOrderline($huidigItem, $order, $nieuwAantal);
+                werkVoorraadBij($huidigItem, $verschil, "af");
             } else {
                 echo "naar de insert";
                 insertInOrderLine($huidigItem, $order, $nieuwAantal);
+                werkVoorraadBij($huidigItem, $verschil, "af");
             }
         }
         if ($nieuwAantal != 0 && $vorigAantal != 0) {
             echo "naar de up";
             updateOrderline($huidigItem, $order, $nieuwAantal);
+            werkVoorraadBij($huidigItem, $verschil, "af");
         }
         if ($nieuwAantal == 0 && $vorigAantal != 0) {
             echo "naar de del";
             deleteOrderLine($huidigItem, $order, $nieuwAantal);
+//            $negatieveVerschil = -1 * $verschil;
+            werkVoorraadBij($huidigItem, $verschil, "by");
         }
     }
 }
@@ -100,6 +106,8 @@ function converteerRijNummer2Item($pItemTeller) {
 function verwerkError($pTxt) {
     global $errorText;
     $errorText = $pTxt;
+    oesLog($errorText);
+    
 }
 
 function bestaatOrderLine($pZoekItem, $pOrder) {
@@ -109,11 +117,28 @@ function bestaatOrderLine($pZoekItem, $pOrder) {
     $conn = connectToDb();
     $resultSet = $conn->query($sql);
 //    var_dump($resultSet);
-    
+
     if ($resultSet->num_rows == 0) {
         return false;
     } else {
         return true;
+    }
+}
+
+function werkVoorraadBij($pItem, $pAmountBijBoeken, $afby) {
+
+    if ($pAmountBijBoeken > 0) {
+        $sql = sprintf("UPDATE `item` SET `stock` =  `stock` +  %d WHERE  `item`.`item` = %d ", $pAmountBijBoeken, $pItem);
+    }
+
+    if ($pAmountBijBoeken < 0) {
+        $sql = sprintf("UPDATE `item` SET `stock` =  `stock`   %d WHERE  `item`.`item` = %d ", $pAmountBijBoeken, $pItem);
+    }
+    echo $sql;
+    echo "<br>";
+    $conn = connectToDb();
+    if (!$conn->query($sql)) {
+        verwerkError(sprintf("Errormessage: [139]  %s\n", $conn->error));
     }
 }
 
