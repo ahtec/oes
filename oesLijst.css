@@ -77,8 +77,6 @@ header::first-letter {
     font-size: 50px;
 }
 
-
-
 table, th, td {
     border: 1px solid black;
     border-collapse: collapse;
@@ -87,20 +85,35 @@ th, td {
     padding: 5px;
     text-align: left;
 }
-table#t01 {
+
+table#picklist {
     table-layout: fixed; width: 800px;
     background-color: #f1f1c1;
-    
 }
 
-
-table#t01 tr:nth-child(even) {
+table#picklist tr:nth-child(even) {
     background-color: #f0eee5;
 }
-table#t01 tr:nth-child(odd) {
+table#picklist tr:nth-child(odd) {
     background-color: #eee;
 }
-table#t01 th {
+table#picklist th {
+    color: white;
+    background-color: black;
+}
+
+table#orderlist {
+    /*table-layout: fixed; width: 800px;*/
+    background-color: #f1f1c1;
+}
+
+table#orderlist tr:nth-child(even) {
+    background-color: #f0eee5;
+}
+table#orderlist tr:nth-child(odd) {
+    background-color: #eee;
+}
+table#orderlist th {
     color: white;
     background-color: black;
 }

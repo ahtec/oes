@@ -11,6 +11,7 @@ $customer = $_SESSION['customer'];
     <head>
         <meta charset="UTF-8">
         <title>Display Item</title>
+        <link    rel = "stylesheet" type = "text/css" href="oes.css"> 
         <script  src="commonFunctions.js"></script>  
         <script>
             function cansel() {

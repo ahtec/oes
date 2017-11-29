@@ -5,6 +5,9 @@ session_start();
     <head>
         <meta charset="UTF-8">
         <title>Create Order</title>
+         <link rel = "stylesheet" type = "text/css" href="oes.css"> 
+        
+
         <script  src="commonFunctions.js"></script>  
         <script>     function validate(form) {
                 fail = validateContent(form.item.value, "Item")

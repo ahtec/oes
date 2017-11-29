@@ -15,7 +15,10 @@ require_once './model.php';
     <head>
         <meta charset="UTF-8">
         <title>Display Prder</title>
-        <link rel = "stylesheet" type = "text/css" href="oesCss.css"> 
+                 <link rel = "stylesheet" type = "text/css" href="oes.css"> 
+
+          
+
 
         <script  src="commonFunctions.js"></script>  
         <script>

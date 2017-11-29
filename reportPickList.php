@@ -21,7 +21,7 @@ require_once './model.php';
                 window.location.assign("reportMenu.html");
             }
         </script> 
-        <link rel = "stylesheet" type = "text/css" href="oesCss.css"> 
+        <link rel = "stylesheet" type = "text/css" href="oesLijst.css"> 
 
 
     </head>
@@ -49,7 +49,7 @@ require_once './model.php';
                 echo " Items for Warehouse: " . $row['warehouse'];
                 echo "</tr></td>";
                 echo "</table>";
-                echo "<table id=t01>";
+                echo "<table id=picklist>";
                 echo "<tr> <th> Item   </th><th> Description </th><th> Amount </th> <th> Order </th><th> Description </th> ";
                 $previousWarehouse = $row['warehouse'];
             }

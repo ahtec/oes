@@ -42,43 +42,7 @@ require_once './model.php';
     <head>
         <meta charset="UTF-8">
         <title>Display Item</title>
-        <style>
-
-            input {
-                font-family: "Arial", "Book Antiqua", Palatino, serif;
-                font-size: 20px;
-            }
-            table {
-                font-family: "Arial", "Book Antiqua", Palatino, serif;
-                font-size: 20px;
-            }
-            table tr:nth-child(even) {
-                background-color: #f0eee5;
-            }
-            table tr:nth-child(odd) {
-                background-color: #eee;
-            }
-            table th {
-                color: white;
-                background-color: black;
-            }
-            .backButton a {
-                float: left;
-                display: block;
-                color: #999999;
-                text-align: center;
-                padding: 14px 16px;
-                text-decoration: none;
-                font-family: "Arial", "Book Antiqua", Palatino, serif;
-                font-size: 30px;
-            }
-            #warehouse{
-                font-family: "Arial", "Book Antiqua", Palatino, serif;
-                font-size: 20px;
-            }
-
-        </style>
-
+         <link rel = "stylesheet" type = "text/css" href="oes.css"> 
         <script  src="commonFunctions.js"></script>  
         <script type="text/javascript">
 

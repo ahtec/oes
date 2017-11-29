@@ -16,7 +16,7 @@ require_once './model.php';
         <meta charset="UTF-8">
         <title>Purchase Items list</title>
         <script  src="commonFunctions.js"></script>  
-        <link rel = "stylesheet" type = "text/css" href="oesCss.css"> 
+        <link rel = "stylesheet" type = "text/css" href="oesLijst.css"> 
     </head>
     <body>
         <?php
@@ -42,7 +42,7 @@ require_once './model.php';
         echo " Purchase Items list ";
         echo "</tr></td>";
         echo "</table>";
-        echo "<table id=t02>";
+        echo "<table id=orderlist>";
         echo "<tr> <th> Item   </th>"
         . "<th> Description </th>"
         . "<th> Stock </th> "
