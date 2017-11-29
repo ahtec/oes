@@ -15,11 +15,7 @@ require_once './model.php';
     <head>
         <meta charset="UTF-8">
         <title>Display Prder</title>
-                 <link rel = "stylesheet" type = "text/css" href="oes.css"> 
-
-          
-
-
+        <link rel = "stylesheet" type = "text/css" href="oes.css"> 
         <script  src="commonFunctions.js"></script>  
         <script>
             function cansel() {
@@ -93,15 +89,14 @@ require_once './model.php';
         function createTagSelect($ParamConn, $selectidname, $p_order) {
             $sql = "SELECT `description` ,`order` FROM `order`;";
             $erinResultSet = $ParamConn->query($sql);
-
             $eruit = "<select id=$selectidname onClick=verwerkWijzOrder(); >";  // assign the <select> openings tag with id and event=functioncall as string  
             for ($x = 0; $x < $erinResultSet->num_rows; $x++) {// count the number of records in the recordset and make sure that the for loops that amount of times
                 $row = $erinResultSet->fetch_assoc();  // Get the next record AS an array into the variable row
-//                if ($row['item'] == $p_item) {
-//                    $eruit .= "<option selected>";   // append new string information with .=
-//                } else {
+                if ($row['order'] == $p_order) {
+                    $eruit .= "<option selected>";   // append new string information with .=
+                } else {
                 $eruit .= "<option>";   // append new string information with .=
-//                }
+                }
                 $eruit .= "["; // make the option with only the naam out of the record set
                 $eruit .= $row['order']; // make the option with only the naam out of the record set
                 $eruit .= "]  "; // make the option with only the naam out of the record set
