@@ -33,11 +33,11 @@ require_once './model.php';
                 var xhttp = new XMLHttpRequest();
                 xhttp.onreadystatechange = function () {
                     if (this.readyState == 4 && this.status == 200) {
-                        console.log("xhttp.responseText");
-                        console.log(xhttp.responseText);
+//                        console.log("xhttp.responseText");
+//                        console.log(xhttp.responseText);
                         var jsonResponse = JSON.parse(xhttp.responseText);
-                        console.log("jsonResponse");
-                        console.log(jsonResponse);
+//                        console.log("jsonResponse");
+//                        console.log(jsonResponse);
                         document.getElementById("order").value = jsonResponse.order;
                         document.getElementById("desc").value = jsonResponse.description;
                         document.getElementById("orderDate").value = jsonResponse.orderDate;
@@ -59,7 +59,7 @@ require_once './model.php';
 
                 <?php
                 $conn = connectToDb();
-                echo "Select order " . createTagSelect($conn, "IDorder", $order);
+                echo "<span id ='idselect'>Select order</span> " . createTagSelect($conn, "IDorder", $order);
                 ?>    
                 <tr> <td> order                  </td> <td><input type="text"  name="order"     value=""              id="order"   size="8"   /></td></tr>           
                 <tr> <td> order description      </td> <td><input type="text"  name="desc"      value=""              id="desc"    size="50"  /></td></tr>

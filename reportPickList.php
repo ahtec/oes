@@ -1,12 +1,12 @@
 <?php
-session_start();
-if (isset($_SESSION)) {
-    $order = 0;
-    $desc = "";
-    $orderDate = date("yyyy-MM-dd");
-    $delDate = date("yyyy-MM-dd");
-    $customer = "";
-}
+//session_start();
+//if (isset($_SESSION)) {
+//    $order = 0;
+//    $desc = "";
+//    $orderDate = date("yyyy-MM-dd");
+//    $delDate = date("yyyy-MM-dd");
+//    $customer = "";
+//}
 require_once './connection.php';
 require_once './model.php';
 ?>

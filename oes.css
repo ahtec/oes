@@ -1,4 +1,13 @@
-  
+#IDitem , #IDorder ,#idselect{
+ font-family: "Arial", "Book Antiqua", Palatino, serif;
+    font-size: 25px;
+        background-color: #f0eee5;
+
+}  
+
+
+
+
 
 input {
     font-family: "Arial", "Book Antiqua", Palatino, serif;

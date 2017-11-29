@@ -41,7 +41,7 @@ require_once './model.php';
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Display Item</title>
+        <title>Maintain Item</title>
          <link rel = "stylesheet" type = "text/css" href="oes.css"> 
         <script  src="commonFunctions.js"></script>  
         <script type="text/javascript">
@@ -68,11 +68,11 @@ require_once './model.php';
                 var xhttp = new XMLHttpRequest();
                 xhttp.onreadystatechange = function () {
                     if (this.readyState == 4 && this.status == 200) {
-                        console.log("xhttp.responseText");
-                        console.log(xhttp.responseText);
+//                        console.log("xhttp.responseText");
+//                        console.log(xhttp.responseText);
                         var jsonItemResponse = JSON.parse(xhttp.responseText);
-                        console.log("jsonItemResponse");
-                        console.log(jsonItemResponse);
+//                        console.log("jsonItemResponse");
+//                        console.log(jsonItemResponse);
 //                        document.getElementById("item").innerHTML      = jsonItemResponse.item;
                         document.getElementById("item").value = jsonItemResponse.item;
                         document.getElementById("desc").value = jsonItemResponse.description;
@@ -99,7 +99,7 @@ require_once './model.php';
                 if ($item == 0) {
 //                    $item = vulSessieItemsGegevensMetEersteItem($conn);
                 }
-                echo "Select artikel " . createTagSelect($conn, "IDitem", $item);
+                echo "<span id ='idselect'>Select artikel</span> " . createTagSelect($conn, "IDitem", $item);
                 ?>    
                 <tr> <td> item                  </td> <td><input type="text"    name="item"     value=0          id=item     size="8"   /></td></tr>           
                 <tr> <td> item description      </td> <td><input type="text"    name="desc"     value=""        id=desc     size="50"  /></td></tr>
