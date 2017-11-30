@@ -42,7 +42,7 @@ require_once './model.php';
     <head>
         <meta charset="UTF-8">
         <title>Maintain Item</title>
-         <link rel = "stylesheet" type = "text/css" href="oes.css"> 
+        <link rel = "stylesheet" type = "text/css" href="oes.css"> 
         <script  src="commonFunctions.js"></script>  
         <script type="text/javascript">
 
@@ -91,17 +91,31 @@ require_once './model.php';
     </head>
     <body>
         <table>
-            <form name="maintainItem" action="updateItemDB.php"   onsubmit="return validate(this)" method =POST>
+            <form name="maintainItem" action="updateItemDB.php"   onsubmit="return validate(this)" method =GET>
                 <!--<form name="insertItem"    onsubmit="return validate(this)" method =POST>-->
 
                 <?php
                 $conn = connectToDb();
                 if ($item == 0) {
-//                    $item = vulSessieItemsGegevensMetEersteItem($conn);
+                    $item = vulSessieItemsGegevensMetEersteItem();
                 }
                 echo "<span id ='idselect'>Select artikel</span> " . createTagSelect($conn, "IDitem", $item);
                 ?>    
-                <tr> <td> item                  </td> <td><input type="text"    name="item"     value=0          id=item     size="8"   /></td></tr>           
+                <tr> <td> item                  </td> <td><input type="text"    name="item"     value=<?php echo $item; ?>      id=item     size="8"   /></td></tr>           
+                <tr> <td> item description      </td> <td><input type="text"    name="desc"     value=<?php echo $desc; ?>      id=desc     size="50"  /></td></tr>
+                <tr> <td> current stock         </td> <td><input type="number"  name="stock"    value=<?php echo $stock; ?>     id=stock    size="30"  /></td></tr>
+                <tr> <td> minimum stock allowed </td> <td><input type="number"  name="minStock" value=<?php echo $minStock; ?>  id=minStock size="30"  /></td></tr>
+                <tr> <td> maximum stock         </td> <td><input type="number"  name="maxStock" value=<?php echo $maxStock; ?>  id=maxStock size="30"  /></td></tr>
+                <tr> <td> warehouse </td> <td>   
+                        <select name="warehouse" id=warehouse> 
+                            <?php
+                            echo geefOption("Small_items_warehouse", $warehouse);
+                            echo geefOption("Bulk_warehouse", $warehouse);
+                            echo geefOption("Temp_controled", $warehouse);
+                            echo geefOption("Secured", $warehouse);
+                            ?>
+                        </select>       
+<!--                <tr> <td> item                  </td> <td><input type="text"    name="item"     value=0          id=item     size="8"   /></td></tr>           
                 <tr> <td> item description      </td> <td><input type="text"    name="desc"     value=""        id=desc     size="50"  /></td></tr>
                 <tr> <td> current stock         </td> <td><input type="number"  name="stock"    value=0         id=stock    size="30"  /></td></tr>
                 <tr> <td> minimum stock allowed </td> <td><input type="number"  name="minStock" value=0         id=minStock size="30"  /></td></tr>
@@ -112,14 +126,14 @@ require_once './model.php';
                             <option value="Bulk_warehouse"> Bulk_warehouse</option> 
                             <option value="Temp_controled">Temp_controled</option> 
                             <option value="Secured">Secured</option> 
-                        </select>       
+                        </select>       -->
 
                 </tr> </td> 
         </table>
-      <br><br>   <input type="submit" value="OK" id=screenButtons">
-            </form>
+        <br><br>   <input type="submit" value="OK" id=screenButtons">
+    </form>
 
-      <div class="backButton" >
+    <div class="backButton" >
         <a href="itemMenu.html" >Cancel</a>
 
 
@@ -175,6 +189,8 @@ require_once './model.php';
 
             return $item;
         }
+
+       
         ?>
 
 

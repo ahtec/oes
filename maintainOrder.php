@@ -1,13 +1,44 @@
 <?php
 session_start();
-if (isset($_SESSION)) {
-    $order = 0;
-    $desc = "";
-    $orderDate = date("yyyy-MM-dd");
-    $delDate = date("yyyy-MM-dd");
-    $customer = "";
-}
 require_once './connection.php';
+
+
+if (isset($_SESSION)) {
+    if (isset($_SESSION['$order'])) {
+        $order = $_SESSION['$order'];
+    } else {
+        $order = vulSessieOrderGegevensMetEersteOrder();
+    }
+    if (isset($_SESSION['desc'])) {
+        $desc = $_SESSION['desc'];
+    } else {
+        $desc = "";
+    }
+    if (isset($_SESSION['orderDate'])) {
+        $orderDate = $_SESSION['orderDate'];
+    } else {
+        $orderDate = date("2017-12-4");
+    }
+
+    if (isset($_SESSION['delDate'])) {
+        $delDate = $_SESSION['delDate'];
+    } else {
+        $delDate = date("2017-12-4");
+    }
+    if (isset($_SESSION['customer '])) {
+        $customer = $_SESSION['customer '];
+    } else {
+        $customer = "";
+    }
+
+
+
+//    $order = 0;
+//    $desc = "";
+//    $orderDate = date("yyyy-MM-dd");
+//    $delDate = date("yyyy-MM-dd");
+//    $customer = "";
+}
 require_once './model.php';
 ?>
 
@@ -57,7 +88,18 @@ require_once './model.php';
                 $conn = connectToDb();
                 echo "<span id ='idselect'>Select order</span> " . createTagSelect($conn, "IDorder", $order);
                 ?>    
-                <tr> <td> order                  </td> <td><input type="text"  name="order"     value=""              id="order"   size="8"   /></td></tr>           
+                <tr> <td> order                  </td> <td><input type="text"  name="order"     value=<?php echo $order;    ?>   id="order"   size="8"   /></td></tr>           
+                <tr> <td> order description      </td> <td><input type="text"  name="desc"      value=<?php echo $desc;     ?>   id="desc"    size="50"  /></td></tr>
+                <tr> <td> Date Ordered           </td> <td><input type="date"  name="orderDate" value=<?php echo $orderDate;?>   id=orderDate size="30"  /></td></tr>
+                <tr> <td> Delivery date          </td> <td><input type="date"  name="delDate"   value=<?php echo $orderDate;?>   id=delDate   size="30"  /></td></tr>
+                <tr> <td> customer  </td> <td>   
+                        <select name="customer" id="customer"> 
+                            <option value="Schiphol">Schiphol</option> 
+                            <option value="KLM">KLM</option> 
+                            <option value="KCS">KCS</option> 
+                            <option value="Meijn">Meijn</option> 
+                        </select> 
+<!--                <tr> <td> order                  </td> <td><input type="text"  name="order"     value=""              id="order"   size="8"   /></td></tr>           
                 <tr> <td> order description      </td> <td><input type="text"  name="desc"      value=""              id="desc"    size="50"  /></td></tr>
                 <tr> <td> Date Ordered           </td> <td><input type="date"  name="orderDate" value="2017-11-27"    id=orderDate size="30"  /></td></tr>
                 <tr> <td> Delivery date          </td> <td><input type="date"  name="delDate"   value="2017-11-28"    id=delDate   size="30"  /></td></tr>
@@ -67,7 +109,7 @@ require_once './model.php';
                             <option value="KLM">KLM</option> 
                             <option value="KCS">KCS</option> 
                             <option value="Meijn">Meijn</option> 
-                        </select> 
+                        </select> -->
 
                 </tr> </td> 
             </table>
@@ -95,7 +137,7 @@ require_once './model.php';
                 if ($row['order'] == $p_order) {
                     $eruit .= "<option selected>";   // append new string information with .=
                 } else {
-                $eruit .= "<option>";   // append new string information with .=
+                    $eruit .= "<option>";   // append new string information with .=
                 }
                 $eruit .= "["; // make the option with only the naam out of the record set
                 $eruit .= $row['order']; // make the option with only the naam out of the record set
@@ -106,6 +148,25 @@ require_once './model.php';
             $eruit .= "</select>"; // <select closing tag
 
             return $eruit; // return the result
+        }
+
+        function vulSessieOrderGegevensMetEersteOrder() {
+            $conn = connectToDb();
+            $sql = "SELECT *  FROM `order`  WHERE 1 LIMIT 1 offset 1 ";
+            $resultSet = $conn->query($sql);
+            $row = $resultSet->fetch_assoc();
+            $order = $row['order'];
+            $desc = $row['description'];
+            $orderDate = $row['orderDate'];
+            $delDate = $row['delDate'];
+            $customer = $row['customer'];
+            $_SESSION['order'] = $row['order'];
+            $_SESSION['desc'] = $row['description'];
+            $_SESSION['orderDate'] = $row['orderDate'];
+            $_SESSION['delDate'] = $row['delDate'];
+            $_SESSION['customer'] = $row['customer'];
+
+            return $order;
         }
         ?>
 
