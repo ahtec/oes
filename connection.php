@@ -11,23 +11,23 @@ function connectToDb() {
     return $out;
 }
 
-
-        function geefOption($pWarehouse, $pSelectedWarehouse) {
-            if ($pWarehouse != $pSelectedWarehouse) {
-                $eruit = "<option value=" . $pWarehouse . ">" . $pWarehouse . "</option>\n";
-            } else {
-                $eruit = "<option selected value = " . $pWarehouse . ">" . $pWarehouse . "</option>\n ";
-            }
-            return $eruit;
-        }
-
+function geefOption($pWarehouse, $pSelectedWarehouse) {
+//    echo $pWarehouse; 
+//    echo $pSelectedWarehouse;
+    if ($pWarehouse != $pSelectedWarehouse) {
+        $eruit = "<option value=" . $pWarehouse . ">" . $pWarehouse . "</option>\n";
+    } else {
+        $eruit = "<option selected value = " . $pWarehouse . ">" . $pWarehouse . "</option>\n ";
+    }
+    return $eruit;
+}
 
 function oesLog($erinText) {
-                $fh = fopen("oes.log", 'a+');
-                fwrite($fh ,date("F j, Y, g:i a"));  
-                fwrite($fh ,$erinText . PHP_EOL);
-                fclose($fh);
-            }
+    $fh = fopen("oes.log", 'a+');
+    fwrite($fh, date("F j, Y, g:i a"));
+    fwrite($fh, $erinText . PHP_EOL);
+    fclose($fh);
+}
 
 //function getSessionVariables() {
 //    $item = $_SESSION['item'];
@@ -37,7 +37,6 @@ function oesLog($erinText) {
 //    $maxStock = $_SESSION['maxStock'];
 //    $warehouse = $_SESSION['warehouse'];
 //}
-
 //function setSessionVariables($erin){
 //    $i=0;
 //$_SESSION['item']       =  $erin[$i++]      ;
@@ -48,10 +47,6 @@ function oesLog($erinText) {
 //$_SESSION['warehouse']  =  $erin[$i++]  ; 
 //
 //}
-
-
-
-
 //function getOrderSessionVariables() {
 //    $order = $_SESSION['order'];
 //    $desc = $_SESSION['desc'];
@@ -59,7 +54,6 @@ function oesLog($erinText) {
 //    $delDate = $_SESSION['delDate'];
 //    $customer = $_SESSION['customer'];
 //}
-
 //
 //function setOrderSessionVariables(array $erin){
 //    var_dump($erin);

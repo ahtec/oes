@@ -49,7 +49,7 @@ session_start();
                 <tr> <td> description           </td> <td><input type="text"   name="desc" value="" size="30"  /> </td></tr>
                 <tr> <td> order date            </td> <td><input type="date"   name="orderDate" value="0" size="30" /></td></tr>
                 <tr> <td> delivery date         </td> <td><input type="date"   name="delDate" value="0" size="30" /></td></tr>
-                <tr> <td> customer td>   
+                <tr> <td> customer    
                         <select name="customer"> 
                             <option value="Schiphol">Schiphol</option> 
                             <option value="KLM">KLM</option> 

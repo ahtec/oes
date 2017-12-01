@@ -18,7 +18,7 @@ $sql = "SELECT * FROM `item` WHERE 1 LIMIT 1 offset " . $_GET['itemSearch'];
 //echo $sql;
 $resultSet = $conn->query($sql);
 
-$row = $resultSet->fetch_assoc();  // Get the next record AS an array into the variable row
+$row = $resultSet->fetch_assoc();  
 //var_dump($row);
 $item      = $row['item']         ;
 $desc      = $row['description']  ; 
@@ -51,7 +51,7 @@ $objTransportItem->description  =   $desc       ;
 $objTransportItem->stock        =   $stock      ;
 $objTransportItem->minStock     =   $minStock   ;
 $objTransportItem->maxStock     =   $maxStock   ;
-$objTransportItem->warehouse    =   $warehouse ;
+$objTransportItem->warehouse    =   $warehouse  ;
 //var_dump($objTransportItem);
         
         

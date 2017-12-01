@@ -2,10 +2,9 @@
 session_start();
 require_once './connection.php';
 
-
 if (isset($_SESSION)) {
-    if (isset($_SESSION['$order'])) {
-        $order = $_SESSION['$order'];
+    if (isset($_SESSION['order'])) {
+        $order = $_SESSION['order'];
     } else {
         $order = vulSessieOrderGegevensMetEersteOrder();
     }
@@ -25,8 +24,8 @@ if (isset($_SESSION)) {
     } else {
         $delDate = date("2017-12-4");
     }
-    if (isset($_SESSION['customer '])) {
-        $customer = $_SESSION['customer '];
+    if (isset($_SESSION['customer'])) {
+        $customer = $_SESSION['customer'];
     } else {
         $customer = "";
     }
@@ -86,18 +85,25 @@ require_once './model.php';
 
                 <?php
                 $conn = connectToDb();
+                if ($order == 0) {
+                    $order = vulSessieOrderGegevensMetEersteOrder();
+                }
+//                echo "customerr";
+//                echo $customer;
                 echo "<span id ='idselect'>Select order</span> " . createTagSelect($conn, "IDorder", $order);
                 ?>    
-                <tr> <td> order                  </td> <td><input type="text"  name="order"     value=<?php echo $order;    ?>   id="order"   size="8"   /></td></tr>           
-                <tr> <td> order description      </td> <td><input type="text"  name="desc"      value=<?php echo $desc;     ?>   id="desc"    size="50"  /></td></tr>
-                <tr> <td> Date Ordered           </td> <td><input type="date"  name="orderDate" value=<?php echo $orderDate;?>   id=orderDate size="30"  /></td></tr>
-                <tr> <td> Delivery date          </td> <td><input type="date"  name="delDate"   value=<?php echo $orderDate;?>   id=delDate   size="30"  /></td></tr>
+                <tr> <td> order                  </td> <td><input type="text"  name="order"     value=<?php echo $order; ?>   id="order"   size="8"   /></td></tr>           
+                <tr> <td> order description      </td> <td><input type="text"  name="desc"      value=<?php echo $desc; ?>   id="desc"    size="50"  /></td></tr>
+                <tr> <td> Date Ordered           </td> <td><input type="date"  name="orderDate" value=<?php echo $orderDate; ?>   id=orderDate size="30"  /></td></tr>
+                <tr> <td> Delivery date          </td> <td><input type="date"  name="delDate"   value=<?php echo $orderDate; ?>   id=delDate   size="30"  /></td></tr>
                 <tr> <td> customer  </td> <td>   
                         <select name="customer" id="customer"> 
-                            <option value="Schiphol">Schiphol</option> 
-                            <option value="KLM">KLM</option> 
-                            <option value="KCS">KCS</option> 
-                            <option value="Meijn">Meijn</option> 
+                            <?php
+                            echo geefOption("Schiphol", $customer);
+                            echo geefOption("KLM", $customer);
+                            echo geefOption("KCS", $customer);
+                            echo geefOption("Meijn", $customer);
+                            ?>
                         </select> 
 <!--                <tr> <td> order                  </td> <td><input type="text"  name="order"     value=""              id="order"   size="8"   /></td></tr>           
                 <tr> <td> order description      </td> <td><input type="text"  name="desc"      value=""              id="desc"    size="50"  /></td></tr>
@@ -153,6 +159,7 @@ require_once './model.php';
         function vulSessieOrderGegevensMetEersteOrder() {
             $conn = connectToDb();
             $sql = "SELECT *  FROM `order`  WHERE 1 LIMIT 1 offset 1 ";
+            echo $sql;
             $resultSet = $conn->query($sql);
             $row = $resultSet->fetch_assoc();
             $order = $row['order'];
@@ -165,6 +172,7 @@ require_once './model.php';
             $_SESSION['orderDate'] = $row['orderDate'];
             $_SESSION['delDate'] = $row['delDate'];
             $_SESSION['customer'] = $row['customer'];
+//            echo $customer;
 
             return $order;
         }
