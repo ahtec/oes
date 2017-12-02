@@ -60,7 +60,7 @@ function deleteOrderLine($zoekItem, $pOrder) {
     echo $sql;
     echo "<br>";
     if (!$conn->query($sql)) {
-        verwerkError(sprintf("Errormessage: %s\n", $conn->error));
+        verwerkError(sprintf("Errormessage63: %s\n", $conn->error));
     }
 
     $conn->close();
@@ -72,7 +72,7 @@ function updateOrderline($zoekItem, $pOrder, $pAmount) {
     echo "<br>";
     $conn = connectToDb();
     if (!$conn->query($sql)) {
-        verwerkError(sprintf("Errormessage: %s\n", $conn->error));
+        verwerkError(sprintf("Errormessage 74: %s\n", $conn->error));
     }
 }
 
@@ -82,7 +82,7 @@ function insertInOrderLine($zoekItem, $pOrder, $pAmount) {
     echo "<br>";
     $conn = connectToDb();
     if (!$conn->query($sql)) {
-        verwerkError(sprintf("Errormessage: %s\n", $conn->error));
+        verwerkError(sprintf("Errormessage 85: %s\n", $conn->error));
     }
 }
 
