@@ -77,7 +77,7 @@ function updateOrderline($zoekItem, $pOrder, $pAmount) {
 }
 
 function insertInOrderLine($zoekItem, $pOrder, $pAmount) {
-    $sql = sprintf("INSERT INTO `orderLines` ( `order`,  `item`, `amount`) VALUES ( %d, %d , %d)", $pOrder, $zoekItem, $pAmount);
+    $sql = sprintf("INSERT INTO `orderlines` ( `order`,  `item`, `amount`) VALUES ( %d, %d , %d)", $pOrder, $zoekItem, $pAmount);
     echo $sql;
     echo "<br>";
     $conn = connectToDb();

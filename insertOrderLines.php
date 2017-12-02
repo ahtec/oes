@@ -50,7 +50,7 @@ MYTAG;
 //lees orderlines 
 $conn = connectToDb();
 if (!$conn->connect_error) {
-    $sql = sprintf("SELECT * FROM  `orderLines`  where  `order` = %d", $order);
+    $sql = sprintf("SELECT * FROM  `orderlines`  where  `order` = %d", $order);
 //    echo $sql;
     $result = mysqli_query($conn, $sql);
 
@@ -101,7 +101,7 @@ while ($row = mysqli_fetch_array($itemResult)) {
 function geefAnntalVanItemInOrderLines($pOrder, $pItem) {
     $aantalItemsInOrder = 0;
     $conn = connectToDb();
-    $sql = sprintf("SELECT * FROM  `orderLines`  where  `order` = %d   and `item` = %d ", $pOrder, $pItem);
+    $sql = sprintf("SELECT * FROM  `orderlines`  where  `order` = %d   and `item` = %d ", $pOrder, $pItem);
 //    echo $sql;
     $result = mysqli_query($conn, $sql);
     if (count($result) == 0) {
