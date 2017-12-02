@@ -93,7 +93,7 @@ require_once './model.php';
                 echo "<span id ='idselect'>Select order</span> " . createTagSelect($conn, "IDorder", $order);
                 ?>    
                 <tr> <td> order                  </td> <td><input type="text"  name="order"     value=<?php echo $order; ?>   id="order"   size="8"   /></td></tr>           
-                <tr> <td> order description      </td> <td><input type="text"  name="desc"      value=<?php echo $desc; ?>   id="desc"    size="50"  /></td></tr>
+                <tr> <td> order description      </td> <td><input type="text"  name="desc"      value="<?php echo $desc; ?>"   id="desc"    size="50"  /></td></tr>
                 <tr> <td> Date Ordered           </td> <td><input type="date"  name="orderDate" value=<?php echo $orderDate; ?>   id=orderDate size="30"  /></td></tr>
                 <tr> <td> Delivery date          </td> <td><input type="date"  name="delDate"   value=<?php echo $orderDate; ?>   id=delDate   size="30"  /></td></tr>
                 <tr> <td> customer  </td> <td>   

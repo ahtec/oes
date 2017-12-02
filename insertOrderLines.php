@@ -32,7 +32,7 @@ if (isset($_REQUEST)) {
         <table>
             <!--<form name="displayOrder" action="insertOrder.php"    method =POST>-->
             <?php
-            echo <<<MYTAG
+echo <<<MYTAG
                         <tr> <td> order             </td> <td> $order    </td></tr>
                         <tr> <td> order description </td> <td> $desc     </td></tr>
                         <tr> <td> order date        </td> <td> $orderDate </td></tr>
@@ -71,7 +71,7 @@ echo "</table>";
 
 echo "<form name=insertOrderLinesDB   action=insertOrderLinesDB.php   method =GET>";
 
-echo "<table><th> All Avialable  Items </th><th> Amount </th><th> </th><th> </th><th> Description </th><th> Warehouse </th>";
+echo "<table><th> All Avialable  Items </th><th> Amount </th><th> </th><th> </th><th> Description </th><th> Stock </th><th> Warehouse </th>";
 $i = 0;
 while ($row = mysqli_fetch_array($itemResult)) {
     $aantal = geefAnntalVanItemInOrderLines($order, $row['item']);
@@ -80,6 +80,7 @@ while ($row = mysqli_fetch_array($itemResult)) {
     echo "<td>" . $row['item'] . "</td><td> <input type=text name=aantal" . $i . "  id=IDnaam  value =$aantal  > </td>";
     echo "<td>" . "</td><td> <input type=hidden name=hiddenaantal" . $i . "  id=IDnaam  value =$aantal   > </td>";
     echo "<td>" . $row['description'] . "</td>";
+    echo "<td>" . $row['stock'] . "</td>";
     echo "<td>" . $row['warehouse'] . "</td>";
     echo "</tr>";
 }
