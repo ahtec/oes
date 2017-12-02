@@ -51,7 +51,7 @@ for ($i = 1; $i <= $teverwerkenAantal; $i++) {
 
 $conn->close();
 
-header("Location: insertOrderLines.php?errorText=$errorText ");
+//header("Location: insertOrderLines.php?errorText=$errorText ");
 
 function deleteOrderLine($zoekItem, $pOrder) {
 
