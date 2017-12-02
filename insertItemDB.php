@@ -46,7 +46,7 @@ if (!$conn->connect_error) {
     mysqli_close($conn);        // sluit de connectie
     header("Location: displayItem.php");
 } else {
-    $returnText = "error [500] Connection error, see your database administrator <<insertItemDB>>";
+    $returnText = "error [500 49] Connection error, see your database administrator <<insertItemDB>>";
     header("Location: insertItem.php?errorTxt=$returnText ");
 }
 ?>

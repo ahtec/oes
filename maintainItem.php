@@ -102,7 +102,7 @@ require_once './model.php';
                 echo "<span id ='idselect'>Select artikel</span> " . createTagSelect($conn, "IDitem", $item);
                 ?>    
                 <tr> <td> item                  </td> <td><input type="text"    name="item"     value=<?php echo $item; ?>      id=item     size="8"   /></td></tr>           
-                <tr> <td> item description      </td> <td><input type="text"    name="desc"     value=<?php echo $desc; ?>      id=desc     size="50"  /></td></tr>
+                <tr> <td> item description      </td> <td><input type="text"    name="desc"     value="<?php echo $desc; ?>"      id=desc     size="50"  /></td></tr>
                 <tr> <td> current stock         </td> <td><input type="number"  name="stock"    value=<?php echo $stock; ?>     id=stock    size="30"  /></td></tr>
                 <tr> <td> minimum stock allowed </td> <td><input type="number"  name="minStock" value=<?php echo $minStock; ?>  id=minStock size="30"  /></td></tr>
                 <tr> <td> maximum stock         </td> <td><input type="number"  name="maxStock" value=<?php echo $maxStock; ?>  id=maxStock size="30"  /></td></tr>
