@@ -5,14 +5,12 @@ session_start();
     <head>
         <meta charset="UTF-8">
         <title>Create Order</title>
-         <link rel = "stylesheet" type = "text/css" href="oes.css"> 
-        
-
+        <link rel = "stylesheet" type = "text/css" href="oes.css"> 
         <script  src="commonFunctions.js"></script>  
-        <script>     function validate(form) {
+        <script>
+            function validate(form) {
                 fail = validateContent(form.item.value, "Item")
                 fail += validateContent(form.desc.value, "Description")
-
                 if (fail == "")
                     return true
                 else {
@@ -20,14 +18,11 @@ session_start();
                     return false
                 }
             }
+
             function cansel() {
-//                toCansel = true;
                 window.location.assign("orderMenu.html");
-//               alert("In de cansel")
             }
         </script>
-
-
     </head>
     <body>
         <?php
@@ -45,10 +40,10 @@ session_start();
         <table>
             <form name="insertOrder" action="insertOrderDB.php"   onsubmit="return validate(this)" method =POST>
                 <!--<form name="insertItem"    onsubmit="return validate(this)" method =POST>-->
-                <tr> <td> order                 </td> <td><input type="text"   name="order" value="To be generated" size="8" disabled="disabled" />
-                <tr> <td> description           </td> <td><input type="text"   name="desc" value="" size="30"  /> </td></tr>
+                <tr> <td> order                 </td> <td><input type="text"   name="order"     value="To be generated" size="8" disabled="disabled" />
+                <tr> <td> description           </td> <td><input type="text"   name="desc"      value="" size="30"  /> </td></tr>
                 <tr> <td> order date            </td> <td><input type="date"   name="orderDate" value="0" size="30" /></td></tr>
-                <tr> <td> delivery date         </td> <td><input type="date"   name="delDate" value="0" size="30" /></td></tr>
+                <tr> <td> delivery date         </td> <td><input type="date"   name="delDate"   value="0" size="30" /></td></tr>
                 <tr> <td> customer    
                         <select name="customer"> 
                             <option value="Schiphol">Schiphol</option> 
@@ -58,9 +53,8 @@ session_start();
                         </select> 
                 </tr> </td> 
                 <tr> <td>  <br><br>   <input type="submit" value="OK" id=screenButtons"></td></tr>
+            </form>   
         </table>
-    </form>   
- <br><br>   <button onclick="cansel()" >Cansel</button>
-
-</body>
+        <br><br>   <button onclick="cansel()" >Cansel</button>
+    </body>
 </html>

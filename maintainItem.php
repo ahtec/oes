@@ -115,19 +115,6 @@ require_once './model.php';
                             echo geefOption("Secured", $warehouse);
                             ?>
                         </select>       
-<!--                <tr> <td> item                  </td> <td><input type="text"    name="item"     value=0          id=item     size="8"   /></td></tr>           
-                <tr> <td> item description      </td> <td><input type="text"    name="desc"     value=""        id=desc     size="50"  /></td></tr>
-                <tr> <td> current stock         </td> <td><input type="number"  name="stock"    value=0         id=stock    size="30"  /></td></tr>
-                <tr> <td> minimum stock allowed </td> <td><input type="number"  name="minStock" value=0         id=minStock size="30"  /></td></tr>
-                <tr> <td> maximum stock         </td> <td><input type="number"  name="maxStock" value=0         id=maxStock size="30"  /></td></tr>
-                <tr> <td> warehouse </td> <td>   
-                        <select name="warehouse" id=warehouse> 
-                            <option value="Small_items_warehouse"> Small_items_warehouse</option> 
-                            <option value="Bulk_warehouse"> Bulk_warehouse</option> 
-                            <option value="Temp_controled">Temp_controled</option> 
-                            <option value="Secured">Secured</option> 
-                        </select>       -->
-
                 </tr> </td> 
         </table>
         <br><br>   <input type="submit" value="OK" id=screenButtons">
@@ -144,53 +131,48 @@ require_once './model.php';
         $conn = connectToDb();
 
         function createTagSelect($ParamConn, $selectidname, $p_item) {
-            $sql = "SELECT `description` ,`item` FROM `item`;";
+            $sql           = "SELECT `description` ,`item` FROM `item`;";
             $erinResultSet = $ParamConn->query($sql);
-
-//            $eruit = "<select id=$selectidname onChange=verwerkWijzItem(); >";  // assign the <select> openings tag with id and event=functioncall as string  
-            $eruit = "<select id=$selectidname onClick=verwerkWijzItem(); >";  // assign the <select> openings tag with id and event=functioncall as string  
-            for ($x = 0; $x < $erinResultSet->num_rows; $x++) {// count the number of records in the recordset and make sure that the for loops that amount of times
-                $row = $erinResultSet->fetch_assoc();  // Get the next record AS an array into the variable row
+            $eruit = "<select id=$selectidname onClick=verwerkWijzItem(); >";  
+            for ($x = 0; $x < $erinResultSet->num_rows; $x++) {
+                $row = $erinResultSet->fetch_assoc();  
                 if ($row['item'] == $p_item) {
-                    $eruit .= "<option selected>";   // append new string information with .=
+                    $eruit .= "<option selected>";   
                 } else {
-                    $eruit .= "<option>";   // append new string information with .=
+                    $eruit .= "<option>";   
                 }
-                $eruit .= "["; // make the option with only the naam out of the record set
-                $eruit .= $row['item']; // make the option with only the naam out of the record set
-                $eruit .= "]  "; // make the option with only the naam out of the record set
-                $eruit .= $row['description']; // make the option with only the naam out of the record set
+                $eruit .= "["; 
+                $eruit .= $row['item']; 
+                $eruit .= "]  "; 
+                $eruit .= $row['description'];
                 $eruit .= "</option>";
             }
-            $eruit .= "</select>"; // <select closing tag
+            $eruit .= "</select>"; 
 
-            return $eruit; // return the result
+            return $eruit; 
         }
 
         function vulSessieItemsGegevensMetEersteItem() {
-            $conn = connectToDb();
-            $sql = "SELECT *  FROM `item`  WHERE 1 LIMIT 1 offset 1 ";
-            $resultSet = $conn->query($sql);
-            $row = $resultSet->fetch_assoc();
+            $conn                  = connectToDb();
+            $sql                   = "SELECT *  FROM `item`  WHERE 1 LIMIT 1 offset 1 ";
+            $resultSet             = $conn->query($sql);
+            $row                   = $resultSet->fetch_assoc();
 //            var_dump($row);
-            $item = $row['item'];
-            $desc = $row['description'];
-            $stock = $row['stock'];
-            $minStock = $row['minStock'];
-            $maxStock = $row['maxStock'];
-            $warehouse = $row['warehouse'];
-            $_SESSION['item'] = $row['item'];
-            $_SESSION['desc'] = $row['description'];
-            $_SESSION['stock'] = $row['stock'];
-            $_SESSION['minStock'] = $row['minStock'];
-            $_SESSION['maxStock'] = $row['maxStock'];
+            $item                  = $row['item'];
+            $desc                  = $row['description'];
+            $stock                 = $row['stock'];
+            $minStock              = $row['minStock'];
+            $maxStock              = $row['maxStock'];
+            $warehouse             = $row['warehouse'];
+            $_SESSION['item']      = $row['item'];
+            $_SESSION['desc']      = $row['description'];
+            $_SESSION['stock']     = $row['stock'];
+            $_SESSION['minStock']  = $row['minStock'];
+            $_SESSION['maxStock']  = $row['maxStock'];
             $_SESSION['warehouse'] = $row['warehouse'];
-
 
             return $item;
         }
-
-       
         ?>
 
 

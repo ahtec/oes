@@ -1,6 +1,3 @@
-
-
-
 function validateContent(field, subject)
 {
     var pattern = new RegExp(/[()~`!#$%\^&*+=\-\[\]\\';,/{}|\\":<>\?]/); //unacceptable chars

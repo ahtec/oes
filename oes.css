@@ -1,32 +1,32 @@
 #IDitem , #IDorder ,#idselect{
- font-family: "Arial", "Book Antiqua", Palatino, serif;
+    font-family: "Arial", "Book Antiqua", Palatino, serif;
     font-size: 25px;
-        background-color: #f0eee5;
-
+    background-color: #f0eee5;
 }  
-
-
-
-
 
 input {
     font-family: "Arial", "Book Antiqua", Palatino, serif;
     font-size: 20px;
 }
+
 table {
     font-family: "Arial", "Book Antiqua", Palatino, serif;
     font-size: 20px;
 }
+
 table tr:nth-child(even) {
     background-color: #f0eee5;
 }
+
 table tr:nth-child(odd) {
     background-color: #eee;
 }
+
 table th {
     color: white;
     background-color: black;
 }
+
 .backButton a {
     float: left;
     display: block;
@@ -37,9 +37,8 @@ table th {
     font-family: "Arial", "Book Antiqua", Palatino, serif;
     font-size: 30px;
 }
+
 #warehouse{
     font-family: "Arial", "Book Antiqua", Palatino, serif;
     font-size: 20px;
 }
-
-

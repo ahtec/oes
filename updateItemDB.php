@@ -1,10 +1,8 @@
 <?php
 
 session_start();
-
 require_once './connection.php';
 $returnText = "";
-//var_dump($_REQUEST);
 
 if (isset($_REQUEST)) {
     $item = $_REQUEST['item'];
@@ -29,7 +27,6 @@ echo "en nu ";
 echo $_REQUEST['item'];
 $conn = connectToDb();
 if (!$conn->connect_error) {
-//          UPDATE `item` SET `description` = 'nummer999' WHERE `item`.`item` = 999
     $sql = "UPDATE `item` SET "
             . "`description`  = '$desc'       "
             . " , `stock`     = '$stock'      "
@@ -38,7 +35,6 @@ if (!$conn->connect_error) {
             . " , `warehouse` = '$warehouse'  "
             . "WHERE `item`.`item` = '$item' ";
 
-//    echo $sql;
     if (!isset($_REQUEST['item'])) {
         $returnText = "error [100] Item not set <<updateItemDB>>";
     } else {
@@ -47,7 +43,6 @@ if (!$conn->connect_error) {
             echo "Error [409] in update update ging fout" . $conn->connect_error;
         }
         mysqli_close($conn);        // sluit de connectie
-
         $returnText = "Changes are implemented ";
     }
 } else {

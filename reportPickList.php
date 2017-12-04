@@ -1,12 +1,4 @@
 <?php
-//session_start();
-//if (isset($_SESSION)) {
-//    $order = 0;
-//    $desc = "";
-//    $orderDate = date("yyyy-MM-dd");
-//    $delDate = date("yyyy-MM-dd");
-//    $customer = "";
-//}
 require_once './connection.php';
 require_once './model.php';
 ?>
@@ -29,17 +21,13 @@ require_once './model.php';
 
 
         <?php
-//SELECT * FROM `orderlines` 
-//JOIN  `order`   on `orderlines` .`order` = `order`.`order`;
-
         $sql = "SELECT * , `order`.`description` as orderDescription  ,  `item`.`description`  as itemDescription     FROM `orderlines` " .
                 "JOIN  `order`  on  `orderlines` .`order` =  `order`.`order` " .
                 "JOIN  `item`   on  `orderlines`.`item`   =  `item`.`item`" .
                 "ORDER BY warehouse  ,  `order`.`order` ";
 
-
-        $conn = connectToDb();
-        $result = $conn->query($sql);
+        $conn              = connectToDb();
+        $result            = $conn->query($sql);
         $previousWarehouse = "zzzzzzzzzzzzzzzzzzzzzz";
 
         while ($row = mysqli_fetch_array($result)) {
@@ -63,9 +51,9 @@ require_once './model.php';
         }
         echo "</table>";
         ?>      
-        
+
         <div class="backButton" >
-                <a href="reportMenu.html" >back</a>
-        
+            <a href="reportMenu.html" >back</a>
+
     </body>
 

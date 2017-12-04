@@ -1,12 +1,4 @@
 <?php
-//session_start();
-//if (isset($_SESSION)) {
-//    $order = 0;
-//    $desc = "";
-//    $orderDate = date("yyyy-MM-dd");
-//    $delDate = date("yyyy-MM-dd");
-//    $customer = "";
-//}
 require_once './connection.php';
 require_once './model.php';
 ?>
@@ -20,22 +12,21 @@ require_once './model.php';
     </head>
     <body>
         <?php
-        $sql = "SELECT * FROM item";
-        $conn = connectToDb();
+        $sql    = "SELECT * FROM item";
+        $conn   = connectToDb();
         $result = $conn->query($sql);
-        $items = array();
-
+        
+        $items  = array();
         while ($row = mysqli_fetch_array($result)) {
-            $objItem = new item();
-            $objItem->item = $row['item'];
+            $objItem              = new item();
+            $objItem->item        = $row['item'];
             $objItem->description = $row['description'];
-            $objItem->stock = $row['stock'];
-            $objItem->minStock = $row['minStock'];
-            $objItem->maxStock = $row['maxStock'];
-            $objItem->warehouse = $row['warehouse'];
-            $items[] = $objItem;
+            $objItem->stock       = $row['stock'];
+            $objItem->minStock    = $row['minStock'];
+            $objItem->maxStock    = $row['maxStock'];
+            $objItem->warehouse   = $row['warehouse'];
+            $items[]              = $objItem;
         }
-
 
         echo "<table>";
         echo "<tr><td id=warehouse>";

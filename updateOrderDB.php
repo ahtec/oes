@@ -28,7 +28,6 @@ if (!$conn->connect_error) {
             . " , `customer`    = '$customer'   "
             . "WHERE `order`.`order` = '$order' ";
 
-//    echo $sql;
     if (!isset($_REQUEST['order'])) {
         $returnText = "error [100] order not set <<updateIrderDB>>";
     } else {
