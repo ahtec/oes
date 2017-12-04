@@ -50,7 +50,7 @@
 //            $helesource = file_get_contents("testfile.txt");
 //                echo $helesource;
             $welkomstext ="";
-            for ($i = 0; $i < 100; $i++) {
+            for ($i = 0; $i < 50; $i++) {
                 $welkomstext .= "--- O E S ";
             }
 

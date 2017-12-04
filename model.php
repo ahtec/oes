@@ -1,6 +1,5 @@
 <?php
 
-
 abstract class moa_item {
     public $item;
     public $description;
